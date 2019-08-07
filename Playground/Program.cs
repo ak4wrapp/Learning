@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Basics
+namespace Playground
 {
     class Program
     {
