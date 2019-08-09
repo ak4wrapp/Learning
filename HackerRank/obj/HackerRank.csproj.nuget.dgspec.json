@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\400212405\\source\\repos\\Learning\\Playground\\Playground.csproj": {}
+    "C:\\Users\\400212405\\source\\repos\\Learning\\HackerRank\\HackerRank.csproj": {}
   },
   "projects": {
-    "C:\\Users\\400212405\\source\\repos\\Learning\\Playground\\Playground.csproj": {
+    "C:\\Users\\400212405\\source\\repos\\Learning\\HackerRank\\HackerRank.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\400212405\\source\\repos\\Learning\\Playground\\Playground.csproj",
-        "projectName": "Playground",
-        "projectPath": "C:\\Users\\400212405\\source\\repos\\Learning\\Playground\\Playground.csproj",
+        "projectUniqueName": "C:\\Users\\400212405\\source\\repos\\Learning\\HackerRank\\HackerRank.csproj",
+        "projectName": "HackerRank",
+        "projectPath": "C:\\Users\\400212405\\source\\repos\\Learning\\HackerRank\\HackerRank.csproj",
         "packagesPath": "C:\\Users\\400212405\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\400212405\\source\\repos\\Learning\\Playground\\obj\\",
+        "outputPath": "C:\\Users\\400212405\\source\\repos\\Learning\\HackerRank\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -21,14 +21,14 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp2.1"
+          "netstandard2.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netcoreapp2.1": {
+          "netstandard2.0": {
             "projectReferences": {}
           }
         },
@@ -39,11 +39,12 @@
         }
       },
       "frameworks": {
-        "netcoreapp2.1": {
+        "netstandard2.0": {
           "dependencies": {
-            "Microsoft.NETCore.App": {
+            "NETStandard.Library": {
+              "suppressParent": "All",
               "target": "Package",
-              "version": "[2.1.0, )",
+              "version": "[2.0.3, )",
               "autoReferenced": true
             }
           },
