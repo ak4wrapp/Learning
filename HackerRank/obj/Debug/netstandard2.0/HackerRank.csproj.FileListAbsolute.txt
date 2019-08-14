@@ -1,8 +1,0 @@
-C:\Users\400212405\source\repos\Learning\HackerRank\bin\Debug\netstandard2.0\HackerRank.deps.json
-C:\Users\400212405\source\repos\Learning\HackerRank\bin\Debug\netstandard2.0\HackerRank.dll
-C:\Users\400212405\source\repos\Learning\HackerRank\bin\Debug\netstandard2.0\HackerRank.pdb
-C:\Users\400212405\source\repos\Learning\HackerRank\obj\Debug\netstandard2.0\HackerRank.csproj.CoreCompileInputs.cache
-C:\Users\400212405\source\repos\Learning\HackerRank\obj\Debug\netstandard2.0\HackerRank.AssemblyInfoInputs.cache
-C:\Users\400212405\source\repos\Learning\HackerRank\obj\Debug\netstandard2.0\HackerRank.AssemblyInfo.cs
-C:\Users\400212405\source\repos\Learning\HackerRank\obj\Debug\netstandard2.0\HackerRank.dll
-C:\Users\400212405\source\repos\Learning\HackerRank\obj\Debug\netstandard2.0\HackerRank.pdb
