@@ -1,0 +1,14 @@
+C:\Users\400212405\source\repos\Learning\PlaygroundTests\bin\Debug\netcoreapp2.1\xunit.runner.visualstudio.dotnetcore.testadapter.dll
+C:\Users\400212405\source\repos\Learning\PlaygroundTests\bin\Debug\netcoreapp2.1\xunit.runner.reporters.netcoreapp10.dll
+C:\Users\400212405\source\repos\Learning\PlaygroundTests\bin\Debug\netcoreapp2.1\xunit.runner.utility.netcoreapp10.dll
+C:\Users\400212405\source\repos\Learning\PlaygroundTests\bin\Debug\netcoreapp2.1\PlaygroundTests.deps.json
+C:\Users\400212405\source\repos\Learning\PlaygroundTests\bin\Debug\netcoreapp2.1\PlaygroundTests.runtimeconfig.json
+C:\Users\400212405\source\repos\Learning\PlaygroundTests\bin\Debug\netcoreapp2.1\PlaygroundTests.runtimeconfig.dev.json
+C:\Users\400212405\source\repos\Learning\PlaygroundTests\bin\Debug\netcoreapp2.1\PlaygroundTests.dll
+C:\Users\400212405\source\repos\Learning\PlaygroundTests\bin\Debug\netcoreapp2.1\PlaygroundTests.pdb
+C:\Users\400212405\source\repos\Learning\PlaygroundTests\obj\Debug\netcoreapp2.1\PlaygroundTests.csprojAssemblyReference.cache
+C:\Users\400212405\source\repos\Learning\PlaygroundTests\obj\Debug\netcoreapp2.1\PlaygroundTests.csproj.CoreCompileInputs.cache
+C:\Users\400212405\source\repos\Learning\PlaygroundTests\obj\Debug\netcoreapp2.1\PlaygroundTests.AssemblyInfoInputs.cache
+C:\Users\400212405\source\repos\Learning\PlaygroundTests\obj\Debug\netcoreapp2.1\PlaygroundTests.AssemblyInfo.cs
+C:\Users\400212405\source\repos\Learning\PlaygroundTests\obj\Debug\netcoreapp2.1\PlaygroundTests.dll
+C:\Users\400212405\source\repos\Learning\PlaygroundTests\obj\Debug\netcoreapp2.1\PlaygroundTests.pdb

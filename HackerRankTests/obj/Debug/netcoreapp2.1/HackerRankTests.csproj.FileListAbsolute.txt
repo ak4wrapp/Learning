@@ -1,0 +1,17 @@
+C:\Users\400212405\source\repos\Learning\HackerRankTests\bin\Debug\netcoreapp2.1\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\400212405\source\repos\Learning\HackerRankTests\bin\Debug\netcoreapp2.1\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\400212405\source\repos\Learning\HackerRankTests\bin\Debug\netcoreapp2.1\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\400212405\source\repos\Learning\HackerRankTests\bin\Debug\netcoreapp2.1\HackerRankTests.deps.json
+C:\Users\400212405\source\repos\Learning\HackerRankTests\bin\Debug\netcoreapp2.1\HackerRankTests.runtimeconfig.json
+C:\Users\400212405\source\repos\Learning\HackerRankTests\bin\Debug\netcoreapp2.1\HackerRankTests.runtimeconfig.dev.json
+C:\Users\400212405\source\repos\Learning\HackerRankTests\bin\Debug\netcoreapp2.1\HackerRankTests.dll
+C:\Users\400212405\source\repos\Learning\HackerRankTests\bin\Debug\netcoreapp2.1\HackerRankTests.pdb
+C:\Users\400212405\source\repos\Learning\HackerRankTests\bin\Debug\netcoreapp2.1\HackerRank.dll
+C:\Users\400212405\source\repos\Learning\HackerRankTests\bin\Debug\netcoreapp2.1\HackerRank.pdb
+C:\Users\400212405\source\repos\Learning\HackerRankTests\obj\Debug\netcoreapp2.1\HackerRankTests.csprojAssemblyReference.cache
+C:\Users\400212405\source\repos\Learning\HackerRankTests\obj\Debug\netcoreapp2.1\HackerRankTests.csproj.CoreCompileInputs.cache
+C:\Users\400212405\source\repos\Learning\HackerRankTests\obj\Debug\netcoreapp2.1\HackerRankTests.AssemblyInfoInputs.cache
+C:\Users\400212405\source\repos\Learning\HackerRankTests\obj\Debug\netcoreapp2.1\HackerRankTests.AssemblyInfo.cs
+C:\Users\400212405\source\repos\Learning\HackerRankTests\obj\Debug\netcoreapp2.1\HackerRankTests.csproj.CopyComplete
+C:\Users\400212405\source\repos\Learning\HackerRankTests\obj\Debug\netcoreapp2.1\HackerRankTests.dll
+C:\Users\400212405\source\repos\Learning\HackerRankTests\obj\Debug\netcoreapp2.1\HackerRankTests.pdb

@@ -6,3 +6,4 @@ C:\Users\400212405\source\repos\Learning\CodingExcercises\obj\Debug\netcoreapp2.
 C:\Users\400212405\source\repos\Learning\CodingExcercises\obj\Debug\netcoreapp2.1\CodingExcercises.AssemblyInfo.cs
 C:\Users\400212405\source\repos\Learning\CodingExcercises\obj\Debug\netcoreapp2.1\CodingExcercises.dll
 C:\Users\400212405\source\repos\Learning\CodingExcercises\obj\Debug\netcoreapp2.1\CodingExcercises.pdb
+C:\Users\400212405\source\repos\Learning\CodingExcercises\obj\Debug\netcoreapp2.1\CodingExcercises.csprojAssemblyReference.cache

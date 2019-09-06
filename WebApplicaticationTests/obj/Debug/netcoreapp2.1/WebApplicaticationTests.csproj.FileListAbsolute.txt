@@ -1,0 +1,17 @@
+C:\Users\400212405\source\repos\Learning\WebApplicaticationTests\bin\Debug\netcoreapp2.1\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\400212405\source\repos\Learning\WebApplicaticationTests\bin\Debug\netcoreapp2.1\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\400212405\source\repos\Learning\WebApplicaticationTests\bin\Debug\netcoreapp2.1\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\400212405\source\repos\Learning\WebApplicaticationTests\bin\Debug\netcoreapp2.1\WebApplicaticationTests.deps.json
+C:\Users\400212405\source\repos\Learning\WebApplicaticationTests\bin\Debug\netcoreapp2.1\WebApplicaticationTests.runtimeconfig.json
+C:\Users\400212405\source\repos\Learning\WebApplicaticationTests\bin\Debug\netcoreapp2.1\WebApplicaticationTests.runtimeconfig.dev.json
+C:\Users\400212405\source\repos\Learning\WebApplicaticationTests\bin\Debug\netcoreapp2.1\WebApplicaticationTests.dll
+C:\Users\400212405\source\repos\Learning\WebApplicaticationTests\bin\Debug\netcoreapp2.1\WebApplicatication.dll
+C:\Users\400212405\source\repos\Learning\WebApplicaticationTests\bin\Debug\netcoreapp2.1\WebApplicatication.pdb
+C:\Users\400212405\source\repos\Learning\WebApplicaticationTests\obj\Debug\netcoreapp2.1\WebApplicaticationTests.csprojAssemblyReference.cache
+C:\Users\400212405\source\repos\Learning\WebApplicaticationTests\obj\Debug\netcoreapp2.1\WebApplicaticationTests.csproj.CoreCompileInputs.cache
+C:\Users\400212405\source\repos\Learning\WebApplicaticationTests\obj\Debug\netcoreapp2.1\WebApplicaticationTests.AssemblyInfoInputs.cache
+C:\Users\400212405\source\repos\Learning\WebApplicaticationTests\obj\Debug\netcoreapp2.1\WebApplicaticationTests.AssemblyInfo.cs
+C:\Users\400212405\source\repos\Learning\WebApplicaticationTests\obj\Debug\netcoreapp2.1\WebApplicaticationTests.csproj.CopyComplete
+C:\Users\400212405\source\repos\Learning\WebApplicaticationTests\bin\Debug\netcoreapp2.1\WebApplicaticationTests.pdb
+C:\Users\400212405\source\repos\Learning\WebApplicaticationTests\obj\Debug\netcoreapp2.1\WebApplicaticationTests.dll
+C:\Users\400212405\source\repos\Learning\WebApplicaticationTests\obj\Debug\netcoreapp2.1\WebApplicaticationTests.pdb
