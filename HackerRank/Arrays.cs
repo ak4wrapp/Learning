@@ -25,5 +25,13 @@ namespace HackerRank
             return maxHrGlass;
         }
         #endregion
+
+        #region Rotate Left
+        // Complete the rotLeft function below.
+        public static int[] RotateLeft(int[] arr, int places)
+        {
+            return new int[places];
+        }
+        #endregion
     }
 }
