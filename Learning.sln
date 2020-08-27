@@ -17,6 +17,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplicatication", "WebAp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplicaticationTests", "WebApplicaticationTests\WebApplicaticationTests.csproj", "{2C96C0FF-E35B-4F26-8396-CD047831241F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeetCode", "LeetCode\LeetCode.csproj", "{C6598B40-765D-4FA6-BEEB-04C5D70D1DA9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeetCodeTests", "LeetCodeTests\LeetCodeTests.csproj", "{7D5D8438-1F76-4380-B749-7897C98EC3F6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +55,14 @@ Global
 		{2C96C0FF-E35B-4F26-8396-CD047831241F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C96C0FF-E35B-4F26-8396-CD047831241F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C96C0FF-E35B-4F26-8396-CD047831241F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6598B40-765D-4FA6-BEEB-04C5D70D1DA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6598B40-765D-4FA6-BEEB-04C5D70D1DA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6598B40-765D-4FA6-BEEB-04C5D70D1DA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6598B40-765D-4FA6-BEEB-04C5D70D1DA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D5D8438-1F76-4380-B749-7897C98EC3F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D5D8438-1F76-4380-B749-7897C98EC3F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D5D8438-1F76-4380-B749-7897C98EC3F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D5D8438-1F76-4380-B749-7897C98EC3F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
