@@ -95,5 +95,11 @@ namespace LeetCode.Arrays
             //digits[0] = 1;
             //return digits;
         }
+
+        public int MaxProfit(int[] prices)
+        {
+            //
+            return 0;
+        }
     }
 }
