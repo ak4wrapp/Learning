@@ -1,7 +1,6 @@
-using GeeksForGeeks;
 using NUnit.Framework;
 
-namespace Tests
+namespace GeeksForGeeksTests
 {
     [TestFixture]
     public class TestsStringOperationsTests

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using CodingExcercises.String;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace CodingExcercisesTests.String
 {
