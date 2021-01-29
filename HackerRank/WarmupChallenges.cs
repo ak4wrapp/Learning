@@ -1,10 +1,12 @@
-﻿using System;
+﻿using HackerRank.Extentions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 using System.Text;
-using HackerRank.Extentions;
 
 namespace HackerRank
 {
+    [TestClass]
     public class WarmupChallenges
     {
         #region SockMerchant
@@ -62,6 +64,24 @@ namespace HackerRank
             return String.Equals(step.ToString(), "U", StringComparison.OrdinalIgnoreCase);
         }
 
+        [TestMethod]
+        public void Test_CountingValleys()
+        {
+            foreach (var spec in new[]{
+                ( totalSteps : 8, steps : "DDUUUUDD", expectedOutPut : 1 ),
+                ( totalSteps : 8, steps : "UDDDUDUU",expectedOutPut : 1 ),
+                ( totalSteps : 8, steps : "UUDDDDUU",expectedOutPut : 1 ),
+                ( totalSteps : 14, steps : "DDDDUUUUDDUUDU", expectedOutPut : 3 )
+            })
+            {
+                int output = CountingValleys(spec.totalSteps, spec.steps);
+
+                Assert.AreEqual(spec.expectedOutPut, output);
+            }
+
+        }
+
+
         #endregion
 
         #region JumpingOnClouds
@@ -85,6 +105,21 @@ namespace HackerRank
                 totalJumps++;
             }
             return totalJumps;
+        }
+
+        [TestMethod]
+        public void Test_JumpingOnTheClouds()
+        {
+            foreach (var spec in new[]{
+                ( clouds : new [] {0, 0, 0, 1, 0, 0}, expectedOutPut : 3 ),
+                ( clouds : new [] {0, 0, 0, 0, 1, 0 }, expectedOutPut : 3 ),
+                ( clouds : new [] {0, 0, 1, 0, 0, 1, 0}, expectedOutPut : 4 )
+            })
+            {
+                int output = JumpingOnClouds(spec.clouds);
+
+                Assert.AreEqual(spec.expectedOutPut, output);
+            }
         }
         #endregion
 
@@ -119,6 +154,24 @@ namespace HackerRank
             totalAs += remainingAs;
 
             return totalAs;
+        }
+
+        [TestMethod]
+        public void Test_RepeatedStringCount()
+        {
+            foreach (var spec in new[]{
+                ( InputStr: "ababa", NumOfChars: 3, ExpectedOutPut: 2 ),
+                ( InputStr: "epsxyyflvrrrxzvnoenvpegvuonodjoxfwdmcvwctmekpsnamchznsoxaklzjgrqruyzavshfbmuhdwwmpbkwcuomqhiyvuztwvq", NumOfChars: 549382313570, ExpectedOutPut: 16481469408 ),
+                ( InputStr: "ceebbcb", NumOfChars : 817723, ExpectedOutPut: 0 ),
+                ( InputStr: "aab", NumOfChars : 882787, ExpectedOutPut: 588525 ),
+                ( InputStr: "aba", NumOfChars : 10, ExpectedOutPut: 7 ),
+                ( InputStr: "a", NumOfChars : 1000000000000, ExpectedOutPut : 1000000000000 )
+            })
+            {
+                long output = CountRepeatedString(spec.InputStr, spec.NumOfChars);
+
+                Assert.AreEqual(spec.ExpectedOutPut, spec.ExpectedOutPut);
+            }
         }
 
         #endregion

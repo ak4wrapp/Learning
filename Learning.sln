@@ -3,19 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29009.5
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackerRank", "HackerRankTests\HackerRank.csproj", "{2CE709B9-A468-49E3-A997-A507645A0521}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackerRank", "HackerRank\HackerRank.csproj", "{2CE709B9-A468-49E3-A997-A507645A0521}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodingExcercises", "CodingExcercisesTests\CodingExcercises.csproj", "{B59F7503-4A67-4FF7-B86D-A5E2AD3B2E8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodingExcercises", "CodingExcercises\CodingExcercises.csproj", "{B59F7503-4A67-4FF7-B86D-A5E2AD3B2E8B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Playground", "PlaygroundTests\Playground.csproj", "{721500EC-49F1-4EE8-86D3-7EAD4E10CF6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Playground", "Playground\Playground.csproj", "{721500EC-49F1-4EE8-86D3-7EAD4E10CF6A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplicatication", "WebApplicatication\WebApplicatication.csproj", "{390BCD41-ACF0-407C-93E5-60A1BE43D536}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplicaticationTests", "WebApplicaticationTests\WebApplicaticationTests.csproj", "{2C96C0FF-E35B-4F26-8396-CD047831241F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeetCode", "LeetCodeTests\LeetCode.csproj", "{7D5D8438-1F76-4380-B749-7897C98EC3F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeetCode", "LeetCode\LeetCode.csproj", "{7D5D8438-1F76-4380-B749-7897C98EC3F6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeeksForGeeks", "GeeksForGeeksTests\GeeksForGeeks.csproj", "{ADC7EB4B-75DA-4249-B7EA-7A295A303C4B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeeksForGeeks", "GeeksForGeeks\GeeksForGeeks.csproj", "{ADC7EB4B-75DA-4249-B7EA-7A295A303C4B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
