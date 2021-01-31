@@ -125,18 +125,14 @@ namespace LeetCode
             return true;
         }
 
-        [Test]
-        public void IsAnagramTest()
+        [TestCase("anagram", "nagaram", true)]
+        [TestCase("rat", "car", false)]
+        [TestCase("a", "ab", false)]
+        [TestCase("aman", "nama", true)]
+
+        public void IsAnagramTest(string Input1, string Input2, bool ExpectedOutPut)
         {
-            foreach (var spec in new[]{
-                ( Input1: "anagram", Input2: "nagaram", ExpectedOutPut: true),
-                ( Input1: "rat", Input2: "car", ExpectedOutPut: false),
-                ( Input1: "a", Input2: "ab", ExpectedOutPut: false),
-                ( Input1: "aman", Input2: "nama", ExpectedOutPut: true),
-            })
-            {
-                Assert.AreEqual(spec.ExpectedOutPut, IsAnagram(spec.Input1, spec.Input2));
-            }
+           Assert.AreEqual(ExpectedOutPut, IsAnagram(Input1, Input2));           
         }
         #endregion
 
