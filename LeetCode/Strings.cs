@@ -74,9 +74,76 @@ namespace LeetCode
 
         #endregion
 
+        #region IsAnagram
+
+        /*
+         *  https://leetcode.com/explore/interview/card/top-interview-questions-easy/127/strings/882/
+         *  
+         *  Given two strings s and t , write a function to determine if t is an anagram of s.
+
+            Example 1:
+
+            Input: s = "anagram", t = "nagaram"
+            Output: true
+
+            Example 2:
+
+            Input: s = "rat", t = "car"
+            Output: false
+            
+            Note:
+            You may assume the string contains only lowercase alphabets.
+
+            Follow up:
+            What if the inputs contain unicode characters? How would you adapt your solution to such case?
+         */
+
+        public bool IsAnagram(string s, string t)
+        {
+            // Both string length has to match
+            if (s.Length != t.Length) return false;
+
+            // Get an array for each 26 characters
+            int[] charCounts = new int[26];
+
+            // We will find index of each chartacter in array s and t
+            // We will decude all with Value of char 'a' as its first chracter so index of current charact falls in from 0 to 26
+            for (int i = 0; i < s.Length; i++)
+            {
+                // increament index for each character from array s
+                // decrement index for each character from array t
+                charCounts[s[i] - 97]++;
+                charCounts[t[i] - 97]--;
+            }
+
+            // expecting finally there will be no index which has a value less than or greater than 0
+            for (int i = 0; i < 26; i++)
+            {
+                if (charCounts[i] != 0) return false;
+            }
+
+            return true;
+        }
+
+        [Test]
+        public void IsAnagramTest()
+        {
+            foreach (var spec in new[]{
+                ( Input1: "anagram", Input2: "nagaram", ExpectedOutPut: true),
+                ( Input1: "rat", Input2: "car", ExpectedOutPut: false),
+                ( Input1: "a", Input2: "ab", ExpectedOutPut: false),
+                ( Input1: "aman", Input2: "nama", ExpectedOutPut: true),
+            })
+            {
+                Assert.AreEqual(spec.ExpectedOutPut, IsAnagram(spec.Input1, spec.Input2));
+            }
+        }
+        #endregion
+
         #region Reverse String
 
         /*
+         *  https://leetcode.com/explore/interview/card/top-interview-questions-easy/127/strings/879/
          *  Write a function that reverses a string. The input string is given as an array of characters char[].
 
             Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory.
@@ -100,6 +167,8 @@ namespace LeetCode
 
         public void ReverseString(char[] s)
         {
+            // Idea is to travers in reverse starting from last index till mid
+            // and compare index in loop with a local variable which in increasing with each cycle
             int index = 0;
             int midIndex = s.Length / 2;
 
