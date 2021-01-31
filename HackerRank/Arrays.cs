@@ -8,18 +8,57 @@ namespace HackerRank
     public class Arrays
     {
         #region HourglassSum
+        /*
+         *  https://www.hackerrank.com/challenges/2d-array/problem
+         *  Given a  2D Array, :
+
+            1 1 1 0 0 0
+            0 1 0 0 0 0
+            1 1 1 0 0 0
+            0 0 0 0 0 0
+            0 0 0 0 0 0
+            0 0 0 0 0 0
+            
+            An hourglass in  is a subset of values with indices falling in this pattern in 's graphical representation:
+
+            a b c
+              d
+            e f g
+            There are 16 hourglasses in arr. An hourglass sum is the sum of an hourglass' values. 
+            Calculate the hourglass sum for every hourglass in , then print the maximum hourglass sum. 
+            The array will always be 6X6.
+         */
         public static int HourglassSum(int[][] arr)
         {
             if (arr == null || arr.Length != 6) throw new ArgumentException();
 
             int maxHrGlass = Int32.MinValue;
-            int currentHrGlassSum = 0;
-            for (int i = 1; i <= 4; i++)
+            // We will start traverse from item on second two and second column as it will include first row and first column
+            for (int i = 1; i <= arr.Length-2; i++)
             {
-                for (int j = 1; j <= 4; j++)
+                // We will travser till second last row and second last column as it will include last row and last column
+                for (int j = 1; j <= arr.Length-2; j++)
                 {
+                    /*
+                     *  Remember HourGlass look like this
+                     *  a b c
+                          d
+                        e f g
 
-                    currentHrGlassSum = arr[i - 1][j - 1] + arr[i - 1][j] + arr[i - 1][j + 1] + arr[i][j] + arr[i + 1][j - 1] + arr[i + 1][j] + arr[i + 1][j + 1];
+                        ==> d is our current position [i][j] so we will pick values like below
+                    *   a [i-1][j-1] b [i-1][j] c [i-1][j+1]
+                                     d [i][j]
+                        e [i+1][j+1] f [i+1][j] g [i+1][j+1]
+                        
+                     **/
+
+                    int currentHrGlassSum = arr[i - 1][j - 1] + 
+                                            arr[i - 1][j] + 
+                                            arr[i - 1][j + 1] + 
+                                            arr[i][j] + 
+                                            arr[i + 1][j - 1] + 
+                                            arr[i + 1][j] + 
+                                            arr[i + 1][j + 1];
 
                     if (currentHrGlassSum > maxHrGlass) maxHrGlass = currentHrGlassSum;
                 }
