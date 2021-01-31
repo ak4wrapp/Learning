@@ -56,7 +56,7 @@ namespace LeetCode
         public void FindDuplicatesTest()
         {
             foreach (var spec in new[]{
-                ( Input: new List<int>(){4,3,2,7,8,2,2,2,3,1 }, ExpectedOutPut: new List<int>(){2,3 } )
+                ( Input: new List<int>(){4,3,2,7,8,2,3,1}, ExpectedOutPut: new List<int>(){2,3 } )
             })
             {
                 var result = FindDuplicates(spec.Input.ToArray());
