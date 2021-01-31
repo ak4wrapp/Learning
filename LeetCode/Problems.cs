@@ -27,16 +27,21 @@ namespace LeetCode
 
         public IList<int> FindDuplicates(int[] nums)
         {
+            /*  How we plan to solve it
+             *  
+             *  We know numbers are between range of 1 to length of array
+             *  We will browse througha all numbers and flag each number at i-1 index as negative
+             *  netx time when same number appear we will find index (i-1) as negative number
+             *  so we will know this number is duplicate
+             */
             List<int> duplicateNumbers = new List<int>();
             if (nums == null || nums.Length == 0)
                 return duplicateNumbers;
-
-            int index = 0;
             for (int i = 0; i < nums.Length; i++)
             {
-                index = Math.Abs(nums[i]) - 1;
+                int index = Math.Abs(nums[i]) - 1;
                 // Check if number at index i is already found and has a value less than 0
-                if (nums[i] < 0 && !duplicateNumbers.Contains(nums[i]))
+                if (nums[index] < 0)
                 {
                     // number was updated earlier hence its a duplicate one this time
                     duplicateNumbers.Add(index + 1);
@@ -51,7 +56,7 @@ namespace LeetCode
         public void FindDuplicatesTest()
         {
             foreach (var spec in new[]{
-                ( Input: new List<int>(){4,3,2,7,8,2,3,1 }, ExpectedOutPut: new List<int>(){2,3 } )
+                ( Input: new List<int>(){4,3,2,7,8,2,2,2,3,1 }, ExpectedOutPut: new List<int>(){2,3 } )
             })
             {
                 var result = FindDuplicates(spec.Input.ToArray());
