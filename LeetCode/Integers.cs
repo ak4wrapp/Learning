@@ -28,13 +28,70 @@ namespace LeetCode
 
         public int Reverse(int x)
         {
-            return 0;
+            #region Explanation of Checked Keyword
+
+            /*
+             *  https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/checked
+                try
+                {
+                    int i = Int32.MaxValue;
+                    int i2 =  i + 10;
+                    Console.WriteLine(i2);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+
+                try
+                {
+                    checked {
+                        int i = Int32.MaxValue;
+                        int i2 = i + 10;
+                        Console.WriteLine(i2);
+                    }                
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+            */
+
+            #endregion
+
+            bool isNegative = false;
+
+            if (x < 0)
+            {
+                x = 0 - x;
+                isNegative = true;
+            }
+
+            int result = 0;
+
+            while (x > 0) {
+                try
+                {
+                    checked
+                    {
+                        result = result * 10 + x % 10;
+                        x = x / 10;
+                    }
+                }
+                catch (OverflowException ex)
+                {
+                    return 0;
+                }
+            }
+
+            return isNegative ? -1 * result : result;
         }
 
         [TestCase(123, 321)]
         [TestCase(-123, -321)]
         [TestCase(120, 21)]
         [TestCase(0, 0)]
+        [TestCase(1534236469, 0)]
         public void ReverseTest(int Input, int Output)
         {
             Assert.AreEqual(Output, Reverse(Input));
