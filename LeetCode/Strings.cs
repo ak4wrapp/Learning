@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using NUnit.Framework;
+using System.Linq;
 
 namespace LeetCode
 {
@@ -191,6 +193,80 @@ namespace LeetCode
         }
 
 
+        #endregion
+
+        #region   First Unique Character in a String
+
+        /*  https://leetcode.com/explore/interview/card/top-interview-questions-easy/127/strings/881/
+         *  
+         *  Given a string, find the first non-repeating character in it and return its index. If it doesn't exist, return -1.
+
+            Examples:
+
+            s = "leetcode"
+            return 0.
+
+            s = "loveleetcode"
+            return 2.
+ 
+            Note: You may assume the string contains only lowercase English letters.
+         */
+
+        public int FirstUniqChar_UsingDictionary(string s)
+        {
+            Dictionary<char, int> dictCharCounts = new Dictionary<char, int>();
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (!dictCharCounts.ContainsKey(s[i]))
+                {
+                    dictCharCounts.Add(s[i], 1);
+                }
+                else
+                {
+                    dictCharCounts[s[i]] += 1;
+                }
+            }
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (dictCharCounts[s[i]] == 1) return i;
+            }
+
+            return -1;
+        }
+
+        [TestCase("aa", -1)]
+        [TestCase("leetcode", 0)]
+        [TestCase("loveleetcode", 2)]
+        public void FirstUniqChar_UsingDictionary(string s, int expectedOutPut)
+        {
+            Assert.AreEqual(expectedOutPut, FirstUniqChar_UsingDictionary(s));
+        }
+
+        private int FirstUniqChar_UsingOneArray(string s) {
+
+            int[] chars = new int[26];
+            foreach (char c in s)
+            {
+                chars[c - 97]++;
+            }
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (chars[s[i] - 97] == 1)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        [TestCase("aa", -1)]
+        [TestCase("leetcode", 0)]
+        [TestCase("loveleetcode", 2)]
+        public void FirstUniqChar_UsingOneArray(string s, int expectedOutPut)
+        {
+            Assert.AreEqual(expectedOutPut, FirstUniqChar_UsingOneArray(s));
+        }
         #endregion
     }
 }
