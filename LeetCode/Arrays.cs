@@ -254,5 +254,64 @@ namespace LeetCode
         }
         #endregion
 
+        #region Move Zeros
+
+        /*
+            https://leetcode.com/explore/interview/card/top-interview-questions-easy/92/array/567/
+         
+            Given an array nums, write a function to move all 0's to the end of it while maintaining the relative order of the non-zero elements.
+
+            Example:
+
+            Input: [0,1,0,3,12]
+            Output: [1,3,12,0,0]
+
+            Note:
+
+            You must do this in-place without making a copy of the array.
+            Minimize the total number of operations.
+
+            Hint # 1
+
+            In-place means we should not be allocating any space for extra array.
+            But we are allowed to modify the existing array.
+            However, as a first step, try coming up with a solution that makes use of additional space.
+            For this problem as well, first apply the idea discussed using an additional array and the in-place
+            solution will pop up eventually.
+
+            Hint # 2
+
+            A two-pointer approach could be helpful here.
+            The idea would be to have one pointer for iterating the array and
+            another pointer that just works on the non-zero elements of the array.
+
+        */
+
+        public void MoveZeroes(int[] nums)
+        {
+            for (int i = 0; i < nums.Length; i++)
+            {
+                // if number is not 0, we will enter this loop to start moving number to left
+                if (nums[i] != 0)
+                {
+                    // start from current index number, while J is greater than 0 and,
+                    // until previous number is 0, we will move number to left
+                    for (int j = i; j > 0 && nums[j - 1] == 0; j--)
+                    {
+                        nums[j - 1] = nums[j];
+                        nums[j] = 0;
+                    }
+                }
+            }
+        }
+
+        [TestCase(new int[] { 0, 0, 1, 0, 2 }, new int[] { 1, 2, 0, 0, 0 })]
+        [TestCase(new int[] { 0, 1, 0, 3, 12 },  new int[] { 1, 3, 12, 0, 0 })]
+        public void MoveZeroesTest(int[] Input, int[] Output)
+        {
+            MoveZeroes(Input);
+            Assert.AreEqual(Output, Input);
+        }
+        #endregion
     }
 }
