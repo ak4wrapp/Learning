@@ -291,12 +291,8 @@ namespace LeetCode
         {
             for (int i = 0; i < nums.Length; i++)
             {
-                // if number is not 0, we will enter this loop to start moving number to left
-                if (nums[i] != 0)
-                {
-                    // start from current index number, while J is greater than 0 and,
-                    // until previous number is 0, we will move number to left
-                    for (int j = i; j > 0 && nums[j - 1] == 0; j--)
+                if (nums[i] != 0) {
+                    for (int j = i; j > 0 && nums[j-1] == 0; j--)
                     {
                         nums[j - 1] = nums[j];
                         nums[j] = 0;

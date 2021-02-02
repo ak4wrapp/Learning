@@ -28,37 +28,6 @@ namespace LeetCode
 
         public int Reverse(int x)
         {
-            #region Explanation of Checked Keyword
-
-            /*
-             *  https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/checked
-                try
-                {
-                    int i = Int32.MaxValue;
-                    int i2 =  i + 10;
-                    Console.WriteLine(i2);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex);
-                }
-
-                try
-                {
-                    checked {
-                        int i = Int32.MaxValue;
-                        int i2 = i + 10;
-                        Console.WriteLine(i2);
-                    }                
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex);
-                }
-            */
-
-            #endregion
-
             bool isNegative = false;
 
             if (x < 0)
@@ -72,6 +41,37 @@ namespace LeetCode
             while (x > 0) {
                 try
                 {
+                    #region Explanation of Checked Keyword
+
+                    /*
+                     *  https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/checked
+                        try
+                        {
+                            int i = Int32.MaxValue;
+                            int i2 =  i + 10;
+                            Console.WriteLine(i2);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex);
+                        }
+
+                        try
+                        {
+                            checked {
+                                int i = Int32.MaxValue;
+                                int i2 = i + 10;
+                                Console.WriteLine(i2);
+                            }                
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex);
+                        }
+                    */
+
+                    #endregion
+
                     checked
                     {
                         result = result * 10 + x % 10;
