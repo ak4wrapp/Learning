@@ -279,28 +279,66 @@ namespace LeetCode
         {
             int profit = 0;
             int lastBuyPrice = 0;
-            int bestBuyPrice = 0;
+
+            bool isBuying = true;
 
             for (int i = 0; i < prices.Length; i++)
             {
                 int todayPrice = prices[i];
 
-                // Check if price Increasing after today
-                int j = i + 1;
-                while(j < prices.Length)
+                if (isBuying)
                 {
-                    if (prices[j] > todayPrice) {
-                        bestBuyPrice = todayPrice;
-                        i++;
-                        j++;
-                    }
+                    // Find last day when price is decresing but also make sure price is increasing after that
+                    int upcomingLowestPriceIndex = getIndexofLowestPriceInFuture(prices, i);
+
+                    // If upcoming lowest price is on last day only, then no need to buy and return profit
+                    if (upcomingLowestPriceIndex == prices.Length -1) return profit;
+
+                    //Buy
+                    lastBuyPrice = prices[upcomingLowestPriceIndex];
+                    i = upcomingLowestPriceIndex;
+
+                    isBuying = false;
+
                 }
-                if (bestBuyPrice != lastBuyPrice) {
-                    lastBuyPrice = bestBuyPrice;
+                else
+                {
+                    // Find upcoming higesht price in future after which price is dropping, making it good to buy
+                    int upcomingHighestPriceIndex = getIndexofHighestPriceInFuture(prices, i);
+
+                    profit += prices[upcomingHighestPriceIndex] - lastBuyPrice;
+                    i = upcomingHighestPriceIndex;
+
+                    lastBuyPrice = 0;
+                    isBuying = true;
                 }
             }
 
             return profit;
+        }
+
+        private int getIndexofLowestPriceInFuture(int[] prices, int startIndex)
+        {
+            int lowestPriceIndex = startIndex;
+            for (int i = startIndex +1; i < prices.Length; i++)
+            {
+                if (prices[i] < prices[lowestPriceIndex]) lowestPriceIndex = i;
+                else break;
+            }
+
+            return lowestPriceIndex;
+        }
+
+        private int getIndexofHighestPriceInFuture(int[] prices, int startIndex)
+        {
+            int highestPriceIndex = startIndex;
+            for (int i = startIndex + 1; i < prices.Length; i++)
+            {
+                if (prices[i] > prices[highestPriceIndex]) highestPriceIndex = i;
+                else break;
+            }
+
+            return highestPriceIndex;
         }
 
         [TestCase(new int[] { 7, 1, 5, 3, 6, 4 }, 7)]
