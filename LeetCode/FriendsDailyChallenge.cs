@@ -72,46 +72,103 @@ namespace LeetCode
  
 
             Constraints:
-
+             
             0 <= s.length <= 5 * 104
             s consists of English letters, digits, symbols and spaces.
          */
 
         public int LengthOfLongestSubstring(string s)
         {
+
+            #region Attempt with one loop
+            //if (String.IsNullOrEmpty(s)) return 0;
+            //if (s.Length == 1) return 1;
+
+            //Dictionary<char, int> dictCharLastIndex = new Dictionary<char, int>();
+            //dictCharLastIndex.Add(s[0], 1);
+
+            //int subStrStartIndex = 0;
+            //int subStrEndIndex = 0;
+
+            //int longestSubStringLength = 1;
+            //for (int i = 0; i < s.Length; i++)
+            //{
+            //    if (!dictCharLastIndex.ContainsKey(s[i]))
+            //    {
+            //        // Means we have not seen this character earlier
+            //        dictCharLastIndex.Add(s[i], i);
+
+            //        // currentSubStringLength = i - lastDuplicateCharIndex + 1;
+            //        currentSubStringLength++;
+            //    }
+            //    else // We have a repeatative character here, reset counters
+            //    {
+            //        // this is the case when we know a new substring 
+            //        // can never be more than longest sub string
+            //        // if (longestSubStringLength > s.Length/2) return longestSubStringLength;
+
+            //        currentSubStringIndex = i;
+            //        lastDuplicateCharIndex = dictCharLastIndex[s[i]] > lastDuplicateCharIndex ?
+            //            dictCharLastIndex[s[i]] : lastDuplicateCharIndex;
+
+            //        dictCharLastIndex[s[i]] = i;
+            //        currentSubStringLength = i - lastDuplicateCharIndex + 1;
+
+            //        lastDuplicateCharIndex = i;
+            //    }
+
+            //    if (currentSubStringLength > longestSubStringLength)
+            //    {
+            //        longestSubStringLength = currentSubStringLength;
+            //    }
+            //}
+            #endregion
+
+            #region Brute Force
             if (String.IsNullOrEmpty(s)) return 0;
             if (s.Length == 1) return 1;
 
-            Dictionary<char, int > dictCharLastIndex = new Dictionary<char, int>();
-            int longestSubStringLength = 0;
-            int currentSubStringLength = 0;
-            int lastDuplicateCharIndex = 0;
-
+            Dictionary<char, int> dictCharLastIndex = new Dictionary<char, int>();
+            int longestSubStringLength = 1;
             for (int i = 0; i < s.Length; i++)
             {
-                if (!dictCharLastIndex.ContainsKey(s[i]))
+                dictCharLastIndex.Add(s[i], 1);
+                for (int j = i + 1; j < s.Length; j++)
                 {
-                    // Means we have not seen this character earlier
-                    dictCharLastIndex.Add(s[i], i);
-                    currentSubStringLength++;
-                }
-                else // We have a repeatative character here, reset counters
-                {
-                    if (longestSubStringLength >= s.Length) return longestSubStringLength;
-
-                    int lastApperance = dictCharLastIndex[s[i]];
-                    currentSubStringLength = i - lastApperance;
-                    lastDuplicateCharIndex = i;
-
+                    if (!dictCharLastIndex.ContainsKey(s[j]))
+                    {
+                        dictCharLastIndex.Add(s[j], 1);
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
 
-                if (currentSubStringLength > longestSubStringLength)
-                {
-                    longestSubStringLength = currentSubStringLength;
-                }
+                longestSubStringLength = Math.Max(dictCharLastIndex.Count,  longestSubStringLength);
+                dictCharLastIndex.Clear();
             }
-
             return longestSubStringLength;
+            #endregion
+
+            #region Copied
+            //if (String.IsNullOrEmpty(s)) return 0;
+            //if (s.Length == 1) return 1;
+
+            //HashSet<char> setChars = new HashSet<char>();
+            //int currentMax = 0, i = 0, j = 0;
+
+            //while (j < s.Length)
+            //    if (!setChars.Contains(s[j]))
+            //    {
+            //        setChars.Add(s[j++]);
+            //        currentMax = Math.Max(currentMax, j - i);
+            //    }
+            //    else
+            //        setChars.Remove(s[i++]);
+
+            //return currentMax;
+            #endregion
         }
 
         [TestCase("abcabcbb", 3)]
@@ -123,6 +180,8 @@ namespace LeetCode
         [TestCase("ab", 2)]
         [TestCase("dvdf", 3)]
         [TestCase("abba", 2)]
+        [TestCase("anviaj", 5)]
+        [TestCase("tmmzuxt", 5)]
         public void LengthOfLongestSubstringTest(string Input, int ExpectedOutput)
         {
             Assert.AreEqual(ExpectedOutput, LengthOfLongestSubstring(Input));
