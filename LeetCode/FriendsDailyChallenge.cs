@@ -42,6 +42,7 @@ namespace LeetCode
 
         #region 2/3/2021 Longest Substring
 
+        #region Problem Description
         /*  https://leetcode.com/problems/longest-substring-without-repeating-characters/
          *  
          *  Given a string s, find the length of the longest substring without repeating characters.
@@ -77,10 +78,36 @@ namespace LeetCode
             s consists of English letters, digits, symbols and spaces.
          */
 
+        #endregion
+
         public int LengthOfLongestSubstring(string s)
         {
 
             #region Attempt with one loop
+            Dictionary<char, int> dictCharLastIndex = new Dictionary<char, int>();
+            int longestSubStringLength = 0;
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (dictCharLastIndex.ContainsKey(s[i]))
+                {
+                    // Set longestSubStringLength to whatever number is greater out of
+                    // Current unique characters Dictionary Length or Previously found longest substr 
+                    longestSubStringLength = Math.Max(longestSubStringLength, dictCharLastIndex.Count);
+
+                    // lets start finding new character from Index of current character;s previously found Index
+                    i = dictCharLastIndex[s[i]];
+
+                    // clear dictionary
+                    dictCharLastIndex.Clear();
+                }
+                else
+                {
+                    dictCharLastIndex.Add(s[i], i);
+                }
+            }
+            longestSubStringLength = Math.Max(longestSubStringLength, dictCharLastIndex.Count);
+            return longestSubStringLength;
+
             //if (String.IsNullOrEmpty(s)) return 0;
             //if (s.Length == 1) return 1;
 
@@ -125,33 +152,33 @@ namespace LeetCode
             #endregion
 
             #region Brute Force
-            if (String.IsNullOrEmpty(s)) return 0;
-            if (s.Length == 1) return 1;
+            //if (String.IsNullOrEmpty(s)) return 0;
+            //if (s.Length == 1) return 1;
 
-            Dictionary<char, int> dictCharLastIndex = new Dictionary<char, int>();
-            int longestSubStringLength = 1;
-            for (int i = 0; i < s.Length; i++)
-            {
-                dictCharLastIndex.Add(s[i], 1);
-                for (int j = i + 1; j < s.Length; j++)
-                {
-                    if (!dictCharLastIndex.ContainsKey(s[j]))
-                    {
-                        dictCharLastIndex.Add(s[j], 1);
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
+            //Dictionary<char, int> dictCharLastIndex = new Dictionary<char, int>();
+            //int longestSubStringLength = 1;
+            //for (int i = 0; i < s.Length; i++)
+            //{
+            //    dictCharLastIndex.Add(s[i], 1);
+            //    for (int j = i + 1; j < s.Length; j++)
+            //    {
+            //        if (!dictCharLastIndex.ContainsKey(s[j]))
+            //        {
+            //            dictCharLastIndex.Add(s[j], 1);
+            //        }
+            //        else
+            //        {
+            //            break;
+            //        }
+            //    }
 
-                longestSubStringLength = Math.Max(dictCharLastIndex.Count,  longestSubStringLength);
-                dictCharLastIndex.Clear();
-            }
-            return longestSubStringLength;
+            //    longestSubStringLength = Math.Max(dictCharLastIndex.Count, longestSubStringLength);
+            //    dictCharLastIndex.Clear();
+            //}
+            //return longestSubStringLength;
             #endregion
 
-            #region Copied
+            #region Copied (80ms Solution
             //if (String.IsNullOrEmpty(s)) return 0;
             //if (s.Length == 1) return 1;
 
@@ -168,6 +195,27 @@ namespace LeetCode
             //        setChars.Remove(s[i++]);
 
             //return currentMax;
+            #endregion
+
+            #region Optimized (Copied), using Dictionary, the approach I was trying)
+
+            //Dictionary<char, int> letters = new Dictionary<char, int>();
+            //int length = 0;
+            //for (int i = 0; i < s.Length; i++)
+            //{
+            //    if (letters.TryGetValue(s[i], out int index))
+            //    {
+            //        length = Math.Max(length, letters.Count);
+            //        i = index;
+            //        letters.Clear();
+            //    }
+            //    else
+            //    {
+            //        letters.Add(s[i], i);
+            //    }
+            //}
+            //length = Math.Max(length, letters.Count);
+            //return length;
             #endregion
         }
 
@@ -186,6 +234,83 @@ namespace LeetCode
         {
             Assert.AreEqual(ExpectedOutput, LengthOfLongestSubstring(Input));
         }
+
+        #endregion
+
+        #region 2/4/2021 Best Time to Buy and Sell Stock
+
+        #region Problem Details
+        /*  https://leetcode.com/explore/featured/card/top-interview-questions-easy/92/array/564/
+         *  
+         *  Say you have an array prices for which the ith element is the price of a given stock on day i.
+
+            Design an algorithm to find the maximum profit. You may complete as many transactions as you like (i.e., buy one and sell one share of the stock multiple times).
+
+            Note: You may not engage in multiple transactions at the same time (i.e., you must sell the stock before you buy again).
+
+            Example 1:
+
+            Input: [7,1,5,3,6,4]
+            Output: 7
+            Explanation: Buy on day 2 (price = 1) and sell on day 3 (price = 5), profit = 5-1 = 4.
+                         Then buy on day 4 (price = 3) and sell on day 5 (price = 6), profit = 6-3 = 3.
+            Example 2:
+
+            Input: [1,2,3,4,5]
+            Output: 4
+            Explanation: Buy on day 1 (price = 1) and sell on day 5 (price = 5), profit = 5-1 = 4.
+                         Note that you cannot buy on day 1, buy on day 2 and sell them later, as you are
+                         engaging multiple transactions at the same time. You must sell before buying again.
+            Example 3:
+
+            Input: [7,6,4,3,1]
+            Output: 0
+            Explanation: In this case, no transaction is done, i.e. max profit = 0.
+ 
+
+            Constraints:
+
+            1 <= prices.length <= 3 * 10 ^ 4
+            0 <= prices[i] <= 10 ^ 4
+         */
+        #endregion
+
+        public int MaxProfit(int[] prices)
+        {
+            int profit = 0;
+            int lastBuyPrice = 0;
+            int bestBuyPrice = 0;
+
+            for (int i = 0; i < prices.Length; i++)
+            {
+                int todayPrice = prices[i];
+
+                // Check if price Increasing after today
+                int j = i + 1;
+                while(j < prices.Length)
+                {
+                    if (prices[j] > todayPrice) {
+                        bestBuyPrice = todayPrice;
+                        i++;
+                        j++;
+                    }
+                }
+                if (bestBuyPrice != lastBuyPrice) {
+                    lastBuyPrice = bestBuyPrice;
+                }
+            }
+
+            return profit;
+        }
+
+        [TestCase(new int[] { 7, 1, 5, 3, 6, 4 }, 7)]
+        [TestCase(new int[] { 1, 2, 3, 4, 5 }, 4)]
+        [TestCase(new int[] { 7, 6, 4, 3, 1 }, 0)]
+        public void MaxProfitTest(int[] prices, int ExpectedoutPut)
+        {
+            Assert.AreEqual(ExpectedoutPut, MaxProfit(prices));
+        }
         #endregion
     }
+
 }
