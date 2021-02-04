@@ -268,5 +268,161 @@ namespace LeetCode
             Assert.AreEqual(expectedOutPut, FirstUniqChar_UsingOneArray(s));
         }
         #endregion
+
+        #region Longest Substring
+
+        #region Problem Description
+        /*  https://leetcode.com/problems/longest-substring-without-repeating-characters/
+         *  
+         *  Given a string s, find the length of the longest substring without repeating characters.
+
+            Example 1:
+
+            Input: s = "abcabcbb"
+            Output: 3
+            Explanation: The answer is "abc", with the length of 3.
+
+            Example 2:
+
+            Input: s = "bbbbb"
+            Output: 1
+            Explanation: The answer is "b", with the length of 1.
+
+            Example 3:
+
+            Input: s = "pwwkew"
+            Output: 3
+            Explanation: The answer is "wke", with the length of 3.
+            Notice that the answer must be a substring, "pwke" is a subsequence and not a substring.
+
+            Example 4:
+
+            Input: s = ""
+            Output: 0
+ 
+
+            Constraints:
+             
+            0 <= s.length <= 5 * 104
+            s consists of English letters, digits, symbols and spaces.
+         */
+
+        #endregion
+
+        public static int LengthOfLongestSubstring(string s)
+        {
+
+            #region Attempt with one loop
+            Dictionary<char, int> dictCharLastIndex = new Dictionary<char, int>();
+            int longestSubStringLength = 0;
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (dictCharLastIndex.ContainsKey(s[i]))
+                {
+                    // Set longestSubStringLength to whatever number is greater out of
+                    // Current unique characters Dictionary Length or Previously found longest substr 
+                    longestSubStringLength = Math.Max(longestSubStringLength, dictCharLastIndex.Count);
+
+                    // lets start finding new character from Index of current character;s previously found Index
+                    i = dictCharLastIndex[s[i]];
+
+                    // clear dictionary
+                    dictCharLastIndex.Clear();
+                }
+                else
+                {
+                    dictCharLastIndex.Add(s[i], i);
+                }
+            }
+            longestSubStringLength = Math.Max(longestSubStringLength, dictCharLastIndex.Count);
+            return longestSubStringLength;
+
+            #endregion
+
+            #region Brute Force Solution
+            //if (String.IsNullOrEmpty(s)) return 0;
+            //if (s.Length == 1) return 1;
+
+            //Dictionary<char, int> dictCharLastIndex = new Dictionary<char, int>();
+            //int longestSubStringLength = 1;
+            //for (int i = 0; i < s.Length; i++)
+            //{
+            //    dictCharLastIndex.Add(s[i], 1);
+            //    for (int j = i + 1; j < s.Length; j++)
+            //    {
+            //        if (!dictCharLastIndex.ContainsKey(s[j]))
+            //        {
+            //            dictCharLastIndex.Add(s[j], 1);
+            //        }
+            //        else
+            //        {
+            //            break;
+            //        }
+            //    }
+
+            //    longestSubStringLength = Math.Max(dictCharLastIndex.Count, longestSubStringLength);
+            //    dictCharLastIndex.Clear();
+            //}
+            //return longestSubStringLength;
+            #endregion
+
+            #region Copied (80ms Solution
+            //if (String.IsNullOrEmpty(s)) return 0;
+            //if (s.Length == 1) return 1;
+
+            //HashSet<char> setChars = new HashSet<char>();
+            //int currentMax = 0, i = 0, j = 0;
+
+            //while (j < s.Length)
+            //    if (!setChars.Contains(s[j]))
+            //    {
+            //        setChars.Add(s[j++]);
+            //        currentMax = Math.Max(currentMax, j - i);
+            //    }
+            //    else
+            //        setChars.Remove(s[i++]);
+
+            //return currentMax;
+            #endregion
+
+            #region Optimized (Copied), using Dictionary, the approach I was trying)
+
+            //Dictionary<char, int> letters = new Dictionary<char, int>();
+            //int length = 0;
+            //for (int i = 0; i < s.Length; i++)
+            //{
+            //    if (letters.TryGetValue(s[i], out int index))
+            //    {
+            //        length = Math.Max(length, letters.Count);
+            //        i = index;
+            //        letters.Clear();
+            //    }
+            //    else
+            //    {
+            //        letters.Add(s[i], i);
+            //    }
+            //}
+            //length = Math.Max(length, letters.Count);
+            //return length;
+            #endregion
+        }
+
+        [TestCase("abcabcbb", 3)]
+        [TestCase("bbbbb", 1)]
+        [TestCase("pwwkew", 3)]
+        [TestCase("", 0)]
+        [TestCase(" ", 1)]
+        [TestCase("   ", 1)]
+        [TestCase("ab", 2)]
+        [TestCase("dvdf", 3)]
+        [TestCase("abba", 2)]
+        [TestCase("anviaj", 5)]
+        [TestCase("tmmzuxt", 5)]
+        public void LengthOfLongestSubstringTest(string Input, int ExpectedOutput)
+        {
+            Assert.AreEqual(ExpectedOutput, LengthOfLongestSubstring(Input));
+        }
+
+        #endregion
     }
 }

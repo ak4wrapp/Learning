@@ -64,7 +64,7 @@ namespace LeetCode
                  *  ==iteration 1==
                  *  
                  *  res is = [[]]
-                 *  i=0; nums[i] is 1; j loop will run(res.Count = 1) times
+                 *  i=0; nums[i] is 1; j loop will run(res.Count = 1) times 
                  *  
                  *  j=0
                  *      subList = new List<int>(res[j]) is new SubList with value {[]}, 

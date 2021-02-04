@@ -9,7 +9,54 @@ namespace LeetCode
 {
     public class Arrays
     {
-        #region RemoveDuplicates
+        #region Remove Duplicates from Sorted Array
+
+        #region Problem Statement
+        /*
+            https://leetcode.com/problems/remove-duplicates-from-sorted-array/
+         
+            Given a sorted array nums, remove the duplicates in-place such that each element appears only once and returns the new length.
+
+            Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory.
+
+            Clarification:
+
+            Confused why the returned value is an integer but your answer is an array?
+
+            Note that the input array is passed in by reference, which means a modification to the input array will be known to the caller as well.
+
+            Internally you can think of this:
+
+            // nums is passed in by reference. (i.e., without making a copy)
+            int len = removeDuplicates(nums);
+
+            // any modification to nums in your function would be known by the caller.
+            // using the length returned by your function, it prints the first len elements.
+            for (int i = 0; i < len; i++) {
+                print(nums[i]);
+            }
+ 
+
+            Example 1:
+
+            Input: nums = [1,1,2]
+            Output: 2, nums = [1,2]
+            Explanation: Your function should return length = 2, with the first two elements of nums being 1 and 2 respectively. It doesn't matter what you leave beyond the returned length.
+            Example 2:
+
+            Input: nums = [0,0,1,1,1,2,2,3,3,4]
+            Output: 5, nums = [0,1,2,3,4]
+            Explanation: Your function should return length = 5, with the first five elements of nums being modified to 0, 1, 2, 3, and 4 respectively. It doesn't matter what values are set beyond the returned length.
+ 
+
+            Constraints:
+
+            0 <= nums.length <= 3 * 104
+            -104 <= nums[i] <= 104
+            nums is sorted in ascending order.
+            */
+        #endregion
+
         public static int RemoveDuplicates(int[] nums)
         {
             if (nums == null || nums.Length < 1) return 0;
@@ -31,7 +78,6 @@ namespace LeetCode
         public void RemoveDuplicatesTest()
         {
             foreach (var spec in new[]{
-                ( InputStr: new int[] { 1, 1, 2}, ExpectedOutPut: 2),
                 ( InputStr: new int[] { 1, 1, 2, 3, 3, 4, 5, 6, 6, 7}, ExpectedOutPut: 7),
                 ( InputStr: new int[] { 1, 1, 2, 3, 4, 5, 6}, ExpectedOutPut: 6)
             })
@@ -122,7 +168,7 @@ namespace LeetCode
         }
 
         #endregion
-        
+
         #region Single Number
         public static int SingleNumber(int[] nums)
         {
@@ -256,6 +302,7 @@ namespace LeetCode
 
         #region Move Zeros
 
+        #region Problem Statement
         /*
             https://leetcode.com/explore/interview/card/top-interview-questions-easy/92/array/567/
          
@@ -284,15 +331,17 @@ namespace LeetCode
             A two-pointer approach could be helpful here.
             The idea would be to have one pointer for iterating the array and
             another pointer that just works on the non-zero elements of the array.
+            */
+        #endregion
 
-        */
 
         public void MoveZeroes(int[] nums)
         {
             for (int i = 0; i < nums.Length; i++)
             {
-                if (nums[i] != 0) {
-                    for (int j = i; j > 0 && nums[j-1] == 0; j--)
+                if (nums[i] != 0)
+                {
+                    for (int j = i; j > 0 && nums[j - 1] == 0; j--)
                     {
                         nums[j - 1] = nums[j];
                         nums[j] = 0;
@@ -302,11 +351,151 @@ namespace LeetCode
         }
 
         [TestCase(new int[] { 0, 0, 1, 0, 2 }, new int[] { 1, 2, 0, 0, 0 })]
-        [TestCase(new int[] { 0, 1, 0, 3, 12 },  new int[] { 1, 3, 12, 0, 0 })]
+        [TestCase(new int[] { 0, 1, 0, 3, 12 }, new int[] { 1, 3, 12, 0, 0 })]
         public void MoveZeroesTest(int[] Input, int[] Output)
         {
             MoveZeroes(Input);
             Assert.AreEqual(Output, Input);
+        }
+        #endregion
+
+        #region Remove Duplicates from Sorted Array Attempt2
+
+        public static int RemoveDuplicatesAttempt2(int[] nums)
+        {
+            if (nums == null || nums.Length < 1) return 0;
+            if (nums.Length == 1) return 1;
+
+            int dups = 1;
+            // We can start with first element as its sorted array
+            for (int i = 1; i < nums.Length; i++)
+            {
+                if (nums[i] > nums[dups - 1])
+                {
+                    nums[dups] = nums[i];
+                    dups++;
+                }
+
+            }
+            return dups;
+        }
+
+        [TestCase(new int[] { 0, 0, 1, 1, 1, 2, 2, 3, 3, 4 }, 5)]
+        [TestCase(new int[] { 1, 1, 2 }, 2)]
+        public void RemoveDuplicatesAttempt2Test(int[] Input, int ExpectedOutPut)
+        {
+
+            Assert.AreEqual(ExpectedOutPut, RemoveDuplicatesAttempt2(Input));
+        }
+
+        #endregion
+
+        #region Best Time to Buy and Sell Stock
+
+        #region Problem Details
+        /*  https://leetcode.com/explore/featured/card/top-interview-questions-easy/92/array/564/
+         *  
+         *  Say you have an array prices for which the ith element is the price of a given stock on day i.
+
+            Design an algorithm to find the maximum profit. You may complete as many transactions as you like (i.e., buy one and sell one share of the stock multiple times).
+
+            Note: You may not engage in multiple transactions at the same time (i.e., you must sell the stock before you buy again).
+
+            Example 1:
+
+            Input: [7,1,5,3,6,4]
+            Output: 7
+            Explanation: Buy on day 2 (price = 1) and sell on day 3 (price = 5), profit = 5-1 = 4.
+                         Then buy on day 4 (price = 3) and sell on day 5 (price = 6), profit = 6-3 = 3.
+            Example 2:
+
+            Input: [1,2,3,4,5]
+            Output: 4
+            Explanation: Buy on day 1 (price = 1) and sell on day 5 (price = 5), profit = 5-1 = 4.
+                         Note that you cannot buy on day 1, buy on day 2 and sell them later, as you are
+                         engaging multiple transactions at the same time. You must sell before buying again.
+            Example 3:
+
+            Input: [7,6,4,3,1]
+            Output: 0
+            Explanation: In this case, no transaction is done, i.e. max profit = 0.
+ 
+
+            Constraints:
+
+            1 <= prices.length <= 3 * 10 ^ 4
+            0 <= prices[i] <= 10 ^ 4
+         */
+        #endregion
+
+        public static int MaxProfit(int[] prices)
+        {
+            int profit = 0;
+            int lastBuyPrice = 0;
+
+            bool isBuying = true;
+
+            for (int i = 0; i < prices.Length; i++)
+            {
+                if (isBuying)
+                {
+                    for (int j = i + 1; j < prices.Length; j++)
+                    {
+                        if (prices[j] < prices[i]) i = j;
+                        else break;
+                    }
+                    if (i == prices.Length - 1) return profit;
+
+                    lastBuyPrice = prices[i];
+                    isBuying = false;
+                }
+                else
+                {
+                    // int upcomingHighestPriceIndex = i;
+                    for (int j = i + 1; j < prices.Length; j++)
+                    {
+                        if (prices[j] > prices[i]) i = j;
+                        else break;
+                    }
+
+                    profit += prices[i] - lastBuyPrice;
+                    isBuying = true;
+                }
+            }
+
+            return profit;
+        }
+
+        [TestCase(new int[] { 7, 1, 5, 3, 6, 4 }, 7)]
+        [TestCase(new int[] { 1, 2, 3, 4, 5 }, 4)]
+        [TestCase(new int[] { 7, 6, 4, 3, 1 }, 0)]
+        public void MaxProfitTest(int[] prices, int ExpectedoutPut)
+        {
+            Assert.AreEqual(ExpectedoutPut, MaxProfit(prices));
+        }
+
+        public static int MaxProfitOptimized(int[] prices)
+        {
+            int profit = 0;
+
+            for (int i = 1; i < prices.Length; i++)
+            {
+                if (prices[i] > prices[i - 1])
+                {
+                    profit += prices[i] - prices[i - 1];
+                }
+            }
+
+            return profit;
+        }
+
+        [TestCase(new int[] { 9, 8, 7, 7, 10 }, 3)]
+        [TestCase(new int[] { 7, 1, 5, 3, 6, 4 }, 7)]
+        [TestCase(new int[] { 1, 2, 3, 4, 5 }, 4)]
+        [TestCase(new int[] { 7, 6, 4, 3, 1 }, 0)]
+        public void MaxProfitOptimizedTest(int[] prices, int ExpectedoutPut)
+        {
+            Assert.AreEqual(ExpectedoutPut, MaxProfitOptimized(prices));
         }
         #endregion
     }
