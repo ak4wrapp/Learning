@@ -86,7 +86,13 @@ namespace HackerRank
         #endregion
 
         #region Rotate Left
-        // Complete the rotLeft function below.
+        #region Problem Statement
+        /*  
+         *  https://www.hackerrank.com/challenges/ctci-array-left-rotation/problem
+         *  
+         */
+        #endregion
+
         public static int[] RotateLeft(int[] arr, int places)
         {
             return new int[places];

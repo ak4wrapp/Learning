@@ -498,5 +498,71 @@ namespace LeetCode
             Assert.AreEqual(ExpectedoutPut, MaxProfitOptimized(prices));
         }
         #endregion
+
+        #region Rotate Array
+
+        #region Problem Statetemnt
+
+        /*
+         *  https://leetcode.com/explore/interview/card/top-interview-questions-easy/92/array/646/
+         *  
+         *  Given an array, rotate the array to the right by k steps, where k is non-negative.
+
+            Follow up:
+
+            Try to come up as many solutions as you can, there are at least 3 different ways to solve this problem.
+            Could you do it in-place with O(1) extra space?
+ 
+
+            Example 1:
+
+            Input: nums = [1,2,3,4,5,6,7], k = 3
+            Output: [5,6,7,1,2,3,4]
+
+            Explanation:
+            rotate 1 steps to the right: [7,1,2,3,4,5,6]
+            rotate 2 steps to the right: [6,7,1,2,3,4,5]
+            rotate 3 steps to the right: [5,6,7,1,2,3,4]
+
+            Example 2:
+
+            Input: nums = [-1,-100,3,99], k = 2
+            Output: [3,99,-1,-100]
+
+            Explanation: 
+            rotate 1 steps to the right: [99,-1,-100,3]
+            rotate 2 steps to the right: [3,99,-1,-100]
+ 
+
+            Constraints:
+
+            1 <= nums.length <= 2 * 104
+            -231 <= nums[i] <= 231 - 1
+            0 <= k <= 105
+         */
+        #endregion
+
+        public void Rotate(int[] nums, int k)
+        {
+            /* 1, 2, 3, 4, 5, 6, 7
+             k=4,
+             i=nums.length=6, i[6]=7
+             7 goes to 6-4 i[2]=4 7<->3 1,2,7,4,5,6,3
+             i=nums.length-1=5, i[5]=6
+             6 goes to 5-3 i[2]=3 6<->3 1,2,6,7,5,3,4
+             i=nums.length-2=4, i[4]=5
+             5 goes to 4-3 i[1]=2 5<->2 1,5,6,7,2,3,4
+            */
+        }
+
+        [TestCase(new int[] { 1, 2, 3, 4, 5, 6, 7 }, 3, new int[] { 5, 6, 7, 1, 2, 3, 4 })]
+        [TestCase(new int[] { -1, -100, 3, 99 }, 2, new int[] { 3, 99, -1, -100 })]
+        public void RotateTest(int[] InputArray, int NumOfRotations, int [] OutputArray)
+        {
+            Rotate(InputArray, NumOfRotations);
+            Assert.AreEqual(OutputArray, InputArray);
+
+        }
+        #endregion
     }
 }
