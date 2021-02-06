@@ -9,7 +9,7 @@ namespace LeetCode
     public class Problems
     {
 
-        #region Subsets
+        #region Return all possible Subsets from given Array of Numbers
         /*  https://leetcode.com/problems/subsets/description/
          *  
          *  Given an integer array nums of unique elements, return all possible subsets (the power set).
@@ -156,6 +156,82 @@ namespace LeetCode
             {
                 Assert.AreEqual(spec.OutPut, Subsets(spec.Input));
             }
+        }
+        #endregion
+
+        #region 953. Verifying an Alien Dictionary
+        /*  
+         *  https://leetcode.com/problems/verifying-an-alien-dictionary/
+         *  
+         *  In an alien language, surprisingly they also use english lowercase letters, but possibly in a different order. The order of the alphabet is some permutation of lowercase letters.
+
+            Given a sequence of words written in the alien language, and the order of the alphabet, return true if and only if the given words are sorted lexicographicaly in this alien language.
+
+            Example 1:
+
+            Input: words = ["hello","leetcode"], order = "hlabcdefgijkmnopqrstuvwxyz"
+            Output: true
+            Explanation: As 'h' comes before 'l' in this language, then the sequence is sorted.
+
+            Example 2:
+
+            Input: words = ["word","world","row"], order = "worldabcefghijkmnpqstuvxyz"
+            Output: false
+            Explanation: As 'd' comes after 'l' in this language, then words[0] > words[1], hence the sequence is unsorted.
+
+            Example 3:
+
+            Input: words = ["apple","app"], order = "abcdefghijklmnopqrstuvwxyz"
+            Output: false
+            Explanation: The first three characters "app" match, and the second string is shorter (in size.) According to lexicographical rules "apple" > "app", because 'l' > '∅', where '∅' is defined as the blank character which is less than any other character (More info).
+ 
+
+            Constraints:
+
+            1 <= words.length <= 100
+            1 <= words[i].length <= 20
+            order.length == 26
+            All characters in words[i] and order are English lowercase letters.
+         */
+
+
+        public bool IsAlienSorted(string[] words, string order)
+        {
+            int[] charIndex = new int[26];
+
+            for (int i = 0; i < order.Length; i++)
+            {
+                charIndex[order[i] - 'a'] = i;
+            }
+
+            for (int i = 0; i < words.Length; i++)
+            {
+                for (int j = 1; j < words.Length; j++)
+                {
+                    int wordLengthToCompare = Math.Min(words[i].Length, words[j].Length);
+
+                    for (int k = 0; k < wordLengthToCompare; k++)
+                    {
+                        char iChar = words[i][k];
+                        char jChar = words[j][k];
+                        if (charIndex[iChar - 'a'] < charIndex[jChar - 'a']) break;
+                        else if (charIndex[iChar - 'a'] > charIndex[jChar - 'a']) return false;
+                        else if (k == wordLengthToCompare - 1 && words[i].Length > words[j].Length)
+                            return false;
+
+                    }
+                }
+
+            }
+            return true;
+        }
+
+        [TestCase(new string[] { "hello", "leetcode" }, "hlabcdefgijkmnopqrstuvwxyz", true)]
+        [TestCase(new string[] { "word", "world", "row" }, "worldabcefghijkmnpqstuvxyz", false)]
+        [TestCase(new string[] { "apple", "app" }, "abcdefghijklmnopqrstuvwxyz", false)]
+        public void IsAlienSorted(string[] Words, string Order, bool ExpectedOutput)
+        {
+            Assert.AreEqual(ExpectedOutput, IsAlienSorted(Words, Order));
         }
         #endregion
     }

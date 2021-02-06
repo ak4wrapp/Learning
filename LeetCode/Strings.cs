@@ -114,8 +114,8 @@ namespace LeetCode
             {
                 // increament index for each character from array s
                 // decrement index for each character from array t
-                charCounts[s[i] - 97]++;
-                charCounts[t[i] - 97]--;
+                charCounts[s[i] - 'a']++;
+                charCounts[t[i] - 'a']--;
             }
 
             // expecting finally there will be no index which has a value less than or greater than 0
@@ -248,11 +248,11 @@ namespace LeetCode
             int[] chars = new int[26];
             foreach (char c in s)
             {
-                chars[c - 97]++;
+                chars[c - 'a']++;
             }
             for (int i = 0; i < s.Length; i++)
             {
-                if (chars[s[i] - 97] == 1)
+                if (chars[s[i] - 'a'] == 1)
                 {
                     return i;
                 }
