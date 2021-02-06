@@ -58,6 +58,20 @@ namespace LeetCode
             Assert.AreEqual(ExpectedoutPut, Arrays.MaxProfitOptimized(prices));
         }
         #endregion
+
+        #region 2/5/2021 Rotate Array and Reverse Linked LIst
+
+        [TestCase(new int[] { 1, 2, 3, 4, 5, 6, 7 }, 3, new int[] { 5, 6, 7, 1, 2, 3, 4 })]
+        [TestCase(new int[] { -1, -100, 3, 99 }, 2, new int[] { 3, 99, -1, -100 })]
+        public void RotateTest(int[] InputArray, int NumOfRotations, int[] OutputArray)
+        {
+            Arrays.RotateRightWithReverse(InputArray, NumOfRotations);
+            Assert.AreEqual(OutputArray, InputArray);
+        }
+
+
+
+        #endregion
     }
 
 }

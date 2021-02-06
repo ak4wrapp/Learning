@@ -542,26 +542,91 @@ namespace LeetCode
          */
         #endregion
 
-        public void Rotate(int[] nums, int k)
+        public static void RotateLeft(int[] nums, int k)
         {
-            /* 1, 2, 3, 4, 5, 6, 7
-             k=4,
-             i=nums.length=6, i[6]=7
-             7 goes to 6-4 i[2]=4 7<->3 1,2,7,4,5,6,3
-             i=nums.length-1=5, i[5]=6
-             6 goes to 5-3 i[2]=3 6<->3 1,2,6,7,5,3,4
-             i=nums.length-2=4, i[4]=5
-             5 goes to 4-3 i[1]=2 5<->2 1,5,6,7,2,3,4
-            */
+            if (nums.Length == 0 || k == 0 || k == nums.Length) return;
+
+            for (int i = 0; i < k; i++)
+            {
+                // take out the first element 
+                int temp = nums[0];
+                for (int j = 0; j < nums.Length -1; j++)
+                {
+                    // shift array elements towards left by 1 place 
+                    nums[j] = nums[j + 1];
+                }
+                nums[nums.Length - 1] = temp;
+            }
         }
 
+        [TestCase(new int[] { 1, 2, 3, 4, 5 }, 2, new int[] { 3, 4, 5, 1, 2 })]
+        [TestCase(new int[] { 1, 2, 3 }, 3, new int[] { 1, 2, 3})]
+        [TestCase(new int[] { 1, 2, 3, 4, 5, 6, 7, 8 }, 4, new int[] { 5, 6, 7, 8, 1, 2, 3, 4 })]
+        public void RotateLeftTest(int[] InputArray, int NumOfRotations, int[] OutputArray)
+        {
+            RotateLeft(InputArray, NumOfRotations);
+            Assert.AreEqual(OutputArray, InputArray);
+        }
+
+        public static void RotateRight(int[] nums, int k)
+        {
+            if (nums.Length == 0 || k == 0 || k == nums.Length) return;
+
+            for (int i = 0; i < k; i++)
+            {
+                // take out the last element
+                int temp = nums[nums.Length - 1];
+
+                for (int j = nums.Length-  1; j >0; j--)
+                {
+                    // shift array elements towards right by 1 place 
+                    nums[j] = nums[j - 1];
+                }
+                nums[0] = temp;
+            }
+
+        }
+
+        [TestCase(new int[] { 1, 2 }, 3, new int[] { 2, 1 })]
+        [TestCase(new int[] { 1, 2, 3, 4, 5 }, 2, new int[] { 4, 5, 1, 2, 3 })]
+        [TestCase(new int[] { 1, 2, 3 }, 3, new int[] { 1, 2, 3 })]
+        [TestCase(new int[] { 1, 2, 3, 4, 5, 6, 7, 8 }, 4, new int[] { 5, 6, 7, 8, 1, 2, 3, 4 })]
+        public void RotateRightTest(int[] InputArray, int NumOfRotations, int[] OutputArray)
+        {
+            RotateRight(InputArray, NumOfRotations);
+            Assert.AreEqual(OutputArray, InputArray);
+        }
+
+
+        public static void RotateRightWithReverse(int[] nums, int k)
+        {
+            if (nums.Length == 0 || k == 0 || k == nums.Length) return;
+
+            // This is to cover cases where k > length
+            k %= nums.Length;
+            reverse(nums, 0, nums.Length - 1);
+            reverse(nums, 0, k - 1);
+            reverse(nums, k, nums.Length - 1);
+        }
+        private static void reverse(int[] nums, int start, int end)
+        {
+            while (start < end)
+            {
+                int temp = nums[start];
+                nums[start] = nums[end];
+                nums[end] = temp;
+                start++;
+                end--;
+            }
+        }
+
+        [TestCase(new int[] { 1, 2 }, 3, new int[] { 2, 1 })]
         [TestCase(new int[] { 1, 2, 3, 4, 5, 6, 7 }, 3, new int[] { 5, 6, 7, 1, 2, 3, 4 })]
         [TestCase(new int[] { -1, -100, 3, 99 }, 2, new int[] { 3, 99, -1, -100 })]
-        public void RotateTest(int[] InputArray, int NumOfRotations, int [] OutputArray)
+        public void RotateRightWithReverseTest(int[] InputArray, int NumOfRotations, int [] OutputArray)
         {
-            Rotate(InputArray, NumOfRotations);
+            RotateRightWithReverse(InputArray, NumOfRotations);
             Assert.AreEqual(OutputArray, InputArray);
-
         }
         #endregion
     }

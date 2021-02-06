@@ -1,6 +1,8 @@
 ﻿using HackerRank.Extentions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace HackerRank
 {
@@ -93,25 +95,80 @@ namespace HackerRank
          */
         #endregion
 
-        public static int[] RotateLeft(int[] arr, int places)
+        #region This is Solution 1, RotateLeftMoveFirstElementToLast - With this two test cases in HackerRank are timing out
+        public static List<int> RotateLeftMoveFirstElementToLast(int d, List<int> arr)
         {
-            return new int[places];
+            for (int i = 0; i < d; i++)
+            {
+                int previous = arr[0];
+
+                for (int j = arr.Count - 1; j >= 0; j--)
+                {
+                    int tmp = arr[j];
+                    arr[j] = previous;
+                    previous = tmp;
+                }
+            }
+
+            return arr;
         }
 
         [TestMethod]
-        public void Test_RotateLeft()
+        public void Test_RotateLeftMoveFirstElementToLast()
         {
 
             foreach (var spec in new[]{
-                ( InputArr: new int[] { 1, 2, 3}, placesToRotate: 1, ExpectedOutPut: new int[] { 2, 3, 1 } )
+                (   InputArr: new List<int>() { 1, 2, 3},
+                    PlacesToRotate: 1,
+                    ExpectedOutPut: new List<int>() { 2, 3, 1 } )
             })
             {
-                int[] outPutArrat = RotateLeft(spec.InputArr, spec.placesToRotate);
+                List<int> OutputList = RotateLeftMoveFirstElementToLast(spec.PlacesToRotate, spec.InputArr);
+                bool AreEquarl = OutputList.SequenceEqual(spec.ExpectedOutPut);
 
-                Assert.AreEqual(outPutArrat, spec.ExpectedOutPut);
+                Assert.AreEqual(true, AreEquarl);
             }
         }
 
         #endregion
+
+        #region This is Solution 2,RotateLeftSplitAndReverse, FindNewIndex Approach
+        public static List<int> RotateLeftOptimizedWithNewIndexFindApproach(int rotatePlaces, List<int> arr)
+        {
+            List<int> rotArray = new List<int>(new int[arr.Count]);
+
+            int count = arr.Count;
+            for (int index = 0; index < count; index++)
+            {
+                int newIndex = (index + count - rotatePlaces) % count;
+                rotArray[newIndex] = arr[index];
+            }
+
+            return rotArray;
+        }
+
+        [TestMethod]
+        public void Test_RotateLeftOptimizedWithNewIndexFindApproach()
+        {
+            foreach (var spec in new[]{
+                    (   InputArr: new List<int>() { 1, 2, 3, 4, 5, 6, 7 },
+                        PlacesToRotate: 2,
+                        ExpectedOutPut: new List<int>() {3, 4, 5, 6, 7, 1, 2 }
+                    ),
+                    (   InputArr: new List<int>() { 1, 2, 3},
+                        PlacesToRotate: 1,
+                        ExpectedOutPut: new List<int>() { 2, 3, 1 } 
+                    )
+            })
+            {
+                List<int> OutputList = RotateLeftOptimizedWithNewIndexFindApproach(spec.PlacesToRotate, spec.InputArr);
+                bool AreEquarl = OutputList.SequenceEqual(spec.ExpectedOutPut);
+
+                Assert.AreEqual(true, AreEquarl);
+            }
+        }
+        #endregion
+
+       #endregion
     }
 }
