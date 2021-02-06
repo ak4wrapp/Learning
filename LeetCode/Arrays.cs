@@ -394,6 +394,7 @@ namespace LeetCode
 
         #region Problem Details
         /*  https://leetcode.com/explore/featured/card/top-interview-questions-easy/92/array/564/
+         *  https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/ 
          *  
          *  Say you have an array prices for which the ith element is the price of a given stock on day i.
 
@@ -505,6 +506,7 @@ namespace LeetCode
 
         /*
          *  https://leetcode.com/explore/interview/card/top-interview-questions-easy/92/array/646/
+         *  https://leetcode.com/problems/rotate-array/
          *  
          *  Given an array, rotate the array to the right by k steps, where k is non-negative.
 
