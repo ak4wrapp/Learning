@@ -359,7 +359,7 @@ namespace LeetCode
         }
         #endregion
 
-        #region Remove Duplicates from Sorted Array Attempt2
+        #region 26. Remove Duplicates from Sorted Array
 
         public static int RemoveDuplicatesAttempt2(int[] nums)
         {
@@ -390,7 +390,7 @@ namespace LeetCode
 
         #endregion
 
-        #region Best Time to Buy and Sell Stock
+        #region 122. Best Time to Buy and Sell Stock II
 
         #region Problem Details
         /*  https://leetcode.com/explore/featured/card/top-interview-questions-easy/92/array/564/
@@ -500,7 +500,7 @@ namespace LeetCode
         }
         #endregion
 
-        #region Rotate Array
+        #region 189. Rotate Array
 
         #region Problem Statetemnt
 

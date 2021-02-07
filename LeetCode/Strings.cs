@@ -269,7 +269,7 @@ namespace LeetCode
         }
         #endregion
 
-        #region Longest Substring
+        #region 3. Longest Substring Without Repeating Characters
 
         #region Problem Description
         /*  https://leetcode.com/problems/longest-substring-without-repeating-characters/
@@ -422,6 +422,88 @@ namespace LeetCode
         {
             Assert.AreEqual(ExpectedOutput, LengthOfLongestSubstring(Input));
         }
+
+        #endregion
+
+        #region 20. Valid Parentheses
+
+        // https://leetcode.com/problems/valid-parentheses/
+
+        #region Problem Statement
+        /*
+            Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+
+            An input string is valid if:
+
+            Open brackets must be closed by the same type of brackets.
+            Open brackets must be closed in the correct order.
+
+
+            Example 1:
+
+                Input: s = "()"
+                Output: true
+
+            Example 2:
+
+                Input: s = "()[]{}"
+                Output: true
+
+            Example 3:
+
+                Input: s = "(]"
+                Output: false
+
+            Example 4:
+            
+                Input: s = "([)]"
+                Output: false
+
+            Example 5:
+
+                Input: s = "{[]}"
+                Output: true
+ 
+
+            Constraints:
+
+            1 <= s.length <= 104
+            s consists of parentheses only '()[]{}'.
+            */
+        #endregion
+
+        #endregion
+
+        #region 647. Palindromic Substrings
+
+        // https://leetcode.com/problems/palindromic-substrings/
+
+        #region Problem Statement
+
+        /*
+            Given a string, your task is to count how many palindromic substrings in this string.
+
+            The substrings with different start indexes or end indexes are counted as different substrings even they consist of same characters.
+
+            Example 1:
+
+            Input: "abc"
+            Output: 3
+            Explanation: Three palindromic strings: "a", "b", "c".
+ 
+            Example 2:
+
+            Input: "aaa"
+            Output: 6
+            Explanation: Six palindromic strings: "a", "a", "a", "aa", "aa", "aaa".
+ 
+
+            Note:
+
+            The input string length won't exceed 1000.
+         */
+
+        #endregion
 
         #endregion
     }
