@@ -190,8 +190,12 @@ namespace LeetCode
             if (l1 == null) return l2;
             if (l2 == null) return l1;
 
-            var runnerHead = new ListNode(-1);   // Creating this dummy node ease the logic
-            var newHead = runnerHead;           // This is what would be merged List
+            var newHead = new ListNode(-1);     // This is what would be merged List
+            var runnerHead = newHead;           // Creating this dummy node ease the logic
+
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine($"newHead Begin => {ListNodeToString(newHead)}");
+            sb.AppendLine($"runnerHead Begin => {ListNodeToString(runnerHead)}");
 
             while (l1 != null && l2 != null)
             {
@@ -206,25 +210,49 @@ namespace LeetCode
                     l1 = l1.next;
                 }
 
+                sb.AppendLine($"runnerHead before runnerHead = runnerHead.next {ListNodeToString(runnerHead)}");
+                sb.AppendLine($"newHead before runnerHead = runnerHead.next {ListNodeToString(newHead)}");
+
                 runnerHead = runnerHead.next;
+
+                sb.AppendLine($"runnerHead after runnerHead = runnerHead.next {ListNodeToString(runnerHead)}");
+                sb.AppendLine($"newHead after runnerHead = runnerHead.next {ListNodeToString(newHead)}");
             }
 
             // Simply add the 'leftover' from the while loop at the end 
             if (l1 != null) runnerHead.next = l1;
             if (l2 != null) runnerHead.next = l2;
 
+            // sb.AppendLine($"runnerHead at the end ${ListNodeToString(runnerHead)}");
+            // sb.AppendLine($"newHead at the end ${ListNodeToString(newHead)}");
+
             return newHead.next;
         }
 
+        private string ListNodeToString(ListNode list)
+        {
+            if (list == null) return "EMPTY";
+
+            string strlist = $"{list.val}";
+
+            while (list.next != null) {
+                strlist += " -> " + list.next.val;
+                list = list.next;
+            }
+            strlist += "-> NULL";
+
+            return strlist;
+        }
 
         [Test]
         public void MergeTwoListsTest()
         {
             ListNode InputLinkedList1 = new ListNode(1, new ListNode(2, new ListNode(4)));
             ListNode InputLinkedList2 = new ListNode(1, new ListNode(3, new ListNode(4)));
+            ListNode ExpectedOutoutList = new ListNode(1, new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(4))))));
             ListNode output = MergeTwoLists(InputLinkedList1, InputLinkedList2);
 
-            Assert.IsTrue(true);
+            Assert.AreEqual(ListNodeToString(ExpectedOutoutList), ListNodeToString(output));
         }
         #endregion
     }
