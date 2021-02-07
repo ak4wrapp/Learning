@@ -234,5 +234,152 @@ namespace LeetCode
             Assert.AreEqual(ExpectedOutput, IsAlienSorted(Words, Order));
         }
         #endregion
+
+        #region 36. Valid Sudoku
+        /*  
+         *  https://leetcode.com/problems/valid-sudoku/
+         *  
+         *  Determine if a 9 x 9 Sudoku board is valid. Only the filled cells need to be validated according to the following rules:
+
+            Each row must contain the digits 1-9 without repetition.
+            Each column must contain the digits 1-9 without repetition.
+            Each of the nine 3 x 3 sub-boxes of the grid must contain the digits 1-9 without repetition.
+            Note:
+
+            A Sudoku board (partially filled) could be valid but is not necessarily solvable.
+            Only the filled cells need to be validated according to the mentioned rules.
+         */
+
+
+        public bool IsValidSudoku(char[][] board)
+        {
+
+            #region Attempt 1
+            //for (int i = 0; i < board.Length; i++)
+            //{
+            //    for (int j = 0; j < board[i].Length; j++)
+            //    {
+            //        // When we have 3rd, 6th and 9th column
+            //        // we want to check block
+            //        if ((i + 1) % 3 == 0 && (j + 1) % 3 == 0 && !isBlockClean(board, i, j)) return false;
+            //    }
+            //}
+
+            #endregion
+
+            #region Attempt2
+            // We already had a block to check, but instead of creating a block of 3X3, we will create a block of diff size
+
+            // Check each Row and Column
+            for (int i = 0; i < 9; i++)
+            {
+                // Check if block Row i * Column 0 to 8 Clean
+                if (!isBlockClean(board, i, i, 0, 8)) return false;
+
+                // Check if block Column i * Row 0 to 8 Clean
+                if (!isBlockClean(board, 0, 8, i, i)) return false;
+            }
+
+            // Check Blocks
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    // Check if block Row i * Column 0 to 8 Clean
+                    if (!isBlockClean(board, i * 3, i * 3 + 2, j * 3, j * 3 + 2)) return false;
+                }
+            }
+            #endregion
+
+            return true;
+        }
+
+        private bool isBlockClean(char[][] board, int rowStartIndex, int rowEndIndex, int colStartIndex, int colEndIndex)
+        {
+            HashSet<char> numbers = new HashSet<char>();
+
+            for (int i = rowStartIndex; i <= rowEndIndex; i++)
+            {
+                for (int j = colStartIndex; j <= colEndIndex; j++)
+                {
+                    if (board[i][j] == '.') continue;
+                    if (!numbers.Add(board[i][j])) return false;
+                }
+            }
+            return true;
+        }
+
+        private bool isBlockClean(char[][] board, int rowIndex, int colIndex)
+        {
+            HashSet<int> numbers = new HashSet<int>();
+
+            for (int i = rowIndex - 2; i <= rowIndex; i++)
+            {
+                if (!isRowClean(board, i)) return false;
+                for (int j = colIndex - 2; j <= colIndex; j++)
+                {
+                    if (!isColumnClean(board, j)) return false;
+
+                    if (board[i][j] == '.') continue;
+
+                    if (numbers.Contains(board[i][j] - '0'))
+                    {
+                        return false;
+                    }
+                    numbers.Add(board[i][j] - '0');
+                }
+            }
+            return true;
+        }
+
+        private bool isColumnClean(char[][] board, int colIndex) {
+            HashSet<int> numbers = new HashSet<int>();
+            for (int i = 0; i < board.Length; i++)
+            {
+                if (board[i][colIndex] == '.') continue;
+                if (numbers.Contains(board[i][colIndex] -'0')) return false;
+                numbers.Add(board[i][colIndex] - '0');
+            }
+            return true;
+        }
+
+        private bool isRowClean(char[][] board, int rowIndex)
+        {
+            HashSet<int> numbers = new HashSet<int>();
+            for (int i = 0; i < board[0].Length; i++)
+            {
+                if (board[rowIndex][i] == '.') continue;
+                if (numbers.Contains(board[rowIndex][i] - '0')) return false;
+                numbers.Add(board[rowIndex][i] - '0');
+            }
+            return true;
+        }
+
+
+        [Test]
+        public void IsValidSudokuTest()
+        {
+            char[][] board = new char[9][]
+            {
+                new char[] { '5', '3', '.', '.', '7', '.', '.', '.', '.' },
+                new char[] { '6', '.', '.', '1', '9', '5', '.', '.', '.' },
+                new char[] { '.', '9', '8', '.', '.', '.', '.', '6', '.' },
+                new char[] { '8', '.', '.', '.', '6', '.', '.', '.', '3' },
+                new char[] { '4', '.', '.', '8', '.', '3', '.', '.', '1' },
+                new char[] { '7', '.', '.', '.', '2', '.', '.', '.', '6' },
+                new char[] { '.', '6', '.', '.', '.', '.', '2', '8', '.' },
+                new char[] { '.', '.', '.', '4', '1', '9', '.', '.', '5' },
+                new char[] { '.', '.', '.', '.', '8', '.', '.', '7', '9' }
+            };
+
+            bool result = IsValidSudoku(board);
+
+            Assert.AreEqual(true, result);
+        }
+        #endregion
+
+        #region 21. Merge Two Sorted Lists
+
+        #endregion
     }
 }

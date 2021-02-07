@@ -72,6 +72,13 @@ namespace LeetCode
 
 
         #endregion
+
+        #region 2/6/2021 Validate Soduku and Merge Sorted Lists
+
+        /// see LeetCode.Problems.cs, region 36. Valid Sudoku"
+        /// see LeedCode.Problems.cs, region 21. Merge Two Sorted Lists
+
+        #endregion
     }
 
 }
