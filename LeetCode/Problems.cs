@@ -9,9 +9,10 @@ namespace LeetCode
     public class Problems
     {
 
-        #region Return all possible Subsets from given Array of Numbers
-        /*  https://leetcode.com/problems/subsets/description/
-         *  
+        #region 78. Subsets
+        // Return all possible Subsets from given Array of Numbers
+        // https://leetcode.com/problems/subsets/description/
+        /*  
          *  Given an integer array nums of unique elements, return all possible subsets (the power set).
 
             The solution set must not contain duplicate subsets. Return the solution in any order.
@@ -378,8 +379,68 @@ namespace LeetCode
         }
         #endregion
 
+        #region 70. Climbing Stairs
+        // https://leetcode.com/problems/climbing-stairs/
+
+        #region Problem Statement
+        /*
+            You are climbing a staircase. It takes n steps to reach the top.
+
+            Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+
+            Example 1:
+
+            Input: n = 2
+            Output: 2
+            Explanation: There are two ways to climb to the top.
+            1. 1 step + 1 step
+            2. 2 steps
+
+            Example 2:
+
+            Input: n = 3
+            Output: 3
+            Explanation: There are three ways to climb to the top.
+            1. 1 step + 1 step + 1 step
+            2. 1 step + 2 steps
+            3. 2 steps + 1 step
+ 
+
+            Constraints:
+
+            1 <= n <= 45
+        */
+        #endregion
+
+        public int ClimbStairs(int n)
+        {
+            if (n <= 2) return n;
+
+            int[] stepsCount = new int[n];
+            stepsCount[0] = 1;
+            stepsCount[1] = 2;
+
+            for (int i = 2; i < n; i++)
+            {
+                stepsCount[i] = stepsCount[i - 1] + stepsCount[i - 2];
+            }
+
+            return stepsCount[n - 1];
+        }
+
+        [TestCase(2, 2)]
+        [TestCase(3, 3)]
+        [TestCase(4, 5)]
+        public void ClimbStairsTest(int Steps, int ExpectedOutput)
+        {
+            Assert.AreEqual(ExpectedOutput, ClimbStairs(Steps));
+        }
+        #endregion
+
         #region 21. Merge Two Sorted Lists
 
         #endregion
+
+
     }
 }
