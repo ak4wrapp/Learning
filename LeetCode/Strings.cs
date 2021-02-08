@@ -472,6 +472,35 @@ namespace LeetCode
             */
         #endregion
 
+        public bool IsValidParanthese(string s)
+        {
+            Stack<char> parantheseStack = new Stack<char>();
+
+            foreach (char c in s)
+            {
+                if (parantheseStack.Count > 0 && c == '}' && parantheseStack.Peek() == '{')
+                    parantheseStack.Pop();
+                else if (parantheseStack.Count > 0 && c == ']' && parantheseStack.Peek() == '[')
+                    parantheseStack.Pop();
+                else if (parantheseStack.Count > 0 && c == ')' && parantheseStack.Peek() == '(')
+                    parantheseStack.Pop();
+                else
+                    parantheseStack.Push(c);
+            }
+
+            return parantheseStack.Count == 0;
+        }
+
+        [TestCase("()", true)]
+        [TestCase("()[]{}", true)]
+        [TestCase("(]", false)]
+        [TestCase("([)]", false)]
+        [TestCase("{[]}", true)]
+        [TestCase("]", false)]
+        public void IsValidParantheseTest(string s, bool ExpectedOutPut)
+        {
+            Assert.AreEqual(ExpectedOutPut, IsValidParanthese(s));
+        }
         #endregion
 
         #region 647. Palindromic Substrings
