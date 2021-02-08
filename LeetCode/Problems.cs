@@ -437,10 +437,5 @@ namespace LeetCode
         }
         #endregion
 
-        #region 21. Merge Two Sorted Lists
-
-        #endregion
-
-
     }
 }

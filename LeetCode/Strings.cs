@@ -534,6 +534,37 @@ namespace LeetCode
 
         #endregion
 
+        public int CountPalindromicSubstrings(string s)
+        {
+            if (string.IsNullOrEmpty(s)) return 0;
+            if (s.Length == 1) return 1;
+
+            bool[,] subStrings = new bool[s.Length, s.Length];            
+            int countPalindromicSubstrings = 0;
+
+            for (int gapInChars = 0; gapInChars < s.Length; gapInChars++)
+            {
+                for (int rowIndex = 0, colIndex = gapInChars; colIndex < s.Length; rowIndex++, colIndex++)
+                {
+                    if (gapInChars == 0)
+                        subStrings[rowIndex, colIndex] = true;
+                    else if (gapInChars == 1)
+                        subStrings[rowIndex, colIndex] = s[rowIndex] == s[colIndex];
+                    else
+                        subStrings[rowIndex, colIndex] = s[rowIndex] == s[colIndex] && subStrings[rowIndex + 1, colIndex - 1] == true;
+
+                    if (subStrings[rowIndex, colIndex] == true) countPalindromicSubstrings++;
+                }
+            }
+
+            return countPalindromicSubstrings;
+        }
+
+        [TestCase("abc", 3)]
+        [TestCase("aaa", 6)]
+        public void CountPalindromicSubstringsTest(string s, int expectedOutPut) {
+            Assert.AreEqual(expectedOutPut, CountPalindromicSubstrings(s));
+        }
         #endregion
     }
 }
