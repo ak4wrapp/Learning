@@ -7,7 +7,7 @@ using System.Text;
 namespace HackerRank
 {
     [TestClass]
-    public class WarmupChallenges
+    public class Challenges
     {
         #region SockMerchant
 
@@ -174,6 +174,42 @@ namespace HackerRank
             }
         }
 
+        #endregion
+
+        #region Ice Cream Parlor
+        // https://www.hackerrank.com/challenges/icecream-parlor/problem
+
+        static int[] icecreamParlor(int m, int[] arr)
+        {
+            IDictionary<int, int> amountIndex = new Dictionary<int, int>();
+
+            for (int i = 0; i < arr.Length; i++)
+            {
+                int currentItemToLook = m - arr[i];
+                if (amountIndex.ContainsKey(currentItemToLook)) return new int[] { amountIndex[currentItemToLook] + 1, i + 1 };
+                amountIndex.Add(arr[i], i);
+
+            }
+            return new int[] { -1, -1 };
+        }
+
+        [TestMethod]
+        public void IceCreamtParlorTest()
+        {
+            int[] flavors = new int[] { 1, 4, 5, 3, 2 };
+            int money = 4;
+            int[] expectedOutput = new int[] { 1, 4 };
+            int[] actualOutput = icecreamParlor(money, flavors);
+
+            CollectionAssert.AreEqual(expectedOutput, actualOutput);
+
+            flavors = new int[] { 2, 2, 4, 3 };
+            money = 4;
+            expectedOutput = new int[] { 1, 2 };
+            actualOutput = icecreamParlor(money, flavors);
+
+            CollectionAssert.AreEqual(expectedOutput, actualOutput);
+        }
         #endregion
     }
 }
