@@ -338,7 +338,7 @@ namespace LeetCode
             for (int i = 0; i < board.Length; i++)
             {
                 if (board[i][colIndex] == '.') continue;
-                if (numbers.Contains(board[i][colIndex] -'0')) return false;
+                if (numbers.Contains(board[i][colIndex] - '0')) return false;
                 numbers.Add(board[i][colIndex] - '0');
             }
             return true;
@@ -437,5 +437,126 @@ namespace LeetCode
         }
         #endregion
 
+        #region 200. Number of Islands
+        // https://leetcode.com/problems/number-of-islands/
+
+        #region Problem Statement
+        /*
+         *  Given an m x n 2d grid map of '1's (land) and '0's (water), return the number of islands.
+
+            An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically. You may assume all four edges of the grid are all surrounded by water.
+
+            Example 1:
+
+            Input: grid = [
+              ["1","1","1","1","0"],
+              ["1","1","0","1","0"],
+              ["1","1","0","0","0"],
+              ["0","0","0","0","0"]
+            ]
+            Output: 1
+
+            Example 2:
+
+            Input: grid = [
+              ["1","1","0","0","0"],
+              ["1","1","0","0","0"],
+              ["0","0","1","0","0"],
+              ["0","0","0","1","1"]
+            ]
+            Output: 3
+         */
+        #endregion
+
+
+        public int NumIslands(char[][] grid)
+        {
+            if (grid?.Length == 0) return 0;
+
+            int numIslands = 0;
+
+            for (int i = 0; i < grid.Length; i++)
+            {
+                for (int j = 0; j < grid[i].Length; j++)
+                {
+                    if (grid[i][j] == '1') {
+
+                        numIslands += 1;
+                        MarkAllConnectedLandAsVisited(grid, i, j);
+                    }
+                }
+            }
+
+            return numIslands;
+        }
+
+        private void MarkAllConnectedLandAsVisited(char[][] grid, int rowIndex, int colIndex)
+        {
+            if (rowIndex < 0 || rowIndex >= grid.Length ||
+                colIndex < 0 || colIndex >= grid[rowIndex].Length ||
+                grid[rowIndex][colIndex] == '0')
+            {
+                return;
+            }
+
+            grid[rowIndex][colIndex] = '0';
+
+            MarkAllConnectedLandAsVisited(grid, rowIndex + 1, colIndex);
+            MarkAllConnectedLandAsVisited(grid, rowIndex - 1, colIndex);
+            MarkAllConnectedLandAsVisited(grid, rowIndex, colIndex + 1);
+            MarkAllConnectedLandAsVisited(grid, rowIndex, colIndex - 1);
+        }
+
+        [Test]
+        public void NumIslands()
+        {
+            foreach (var spec in new[] {(
+                                            inputGrid:  new char[3][] {
+                                                            new char[] {'1','0','1','1','1'},
+                                                            new char[] {'1','0','1','0','1'},
+                                                            new char[] {'1','1','1','0','1'}
+                                                            },
+                                            expectedOutPut: 1
+                                        ),
+                                        (
+                                            inputGrid: new char[4][] {
+                                                            new char[] { '1', '1', '1', '1', '0' },
+                                                            new char[] { '1', '1', '0', '1', '0' },
+                                                            new char[] { '1', '1', '0', '0', '0' },
+                                                            new char[] { '0', '0', '0', '0', '0' }
+                                                       },
+                                             expectedOutPut: 1
+                                        ),
+                                        (
+                                            inputGrid: new char[4][] {
+                                                            new char[] {'1','1','0','0','0'},
+                                                            new char[] {'1','1','0','0','0'},
+                                                            new char[] {'0','0','1','0','0'},
+                                                            new char[] {'0','0','0','1','1'}
+                                                       },
+                                            expectedOutPut: 3
+                                        ),
+                                        (
+                                            inputGrid: new char[3][] {
+                                                            new char[] {'1','1','1'},
+                                                            new char[] {'0','1','0'},
+                                                            new char[] {'1','1','1'}
+                                                       },
+                                            expectedOutPut: 1
+                                        ),
+                                        (
+                                            inputGrid: new char[3][] {
+                                                            new char[] {'0','1','0'},
+                                                            new char[] {'1','0','1'},
+                                                            new char[] {'0','1','0'}
+                                                       },
+                                            expectedOutPut: 4
+                                        )
+                })
+            {
+               Assert.AreEqual(spec.expectedOutPut, NumIslands(spec.inputGrid));
+            }
+        }
+        #endregion
     }
 }

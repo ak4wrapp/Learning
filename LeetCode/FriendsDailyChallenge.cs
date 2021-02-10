@@ -20,7 +20,7 @@ namespace LeetCode
             2/7/2021    20. Valid Parentheses                               LeetCode.Strings.cs
             2/7/2021    647. Palindromic Substrings                         LeetCode.Strings.cs
             2/8/2021    1. Two Sum                                          LeetCode.Arrays.cs
-            2/8/2021    Islands
+            2/8/2021    200. Number of Islands                              LeetCode.Problems.cs
 
          */
     }
