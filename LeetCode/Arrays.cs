@@ -552,7 +552,7 @@ namespace LeetCode
             {
                 // take out the first element 
                 int temp = nums[0];
-                for (int j = 0; j < nums.Length -1; j++)
+                for (int j = 0; j < nums.Length - 1; j++)
                 {
                     // shift array elements towards left by 1 place 
                     nums[j] = nums[j + 1];
@@ -562,7 +562,7 @@ namespace LeetCode
         }
 
         [TestCase(new int[] { 1, 2, 3, 4, 5 }, 2, new int[] { 3, 4, 5, 1, 2 })]
-        [TestCase(new int[] { 1, 2, 3 }, 3, new int[] { 1, 2, 3})]
+        [TestCase(new int[] { 1, 2, 3 }, 3, new int[] { 1, 2, 3 })]
         [TestCase(new int[] { 1, 2, 3, 4, 5, 6, 7, 8 }, 4, new int[] { 5, 6, 7, 8, 1, 2, 3, 4 })]
         public void RotateLeftTest(int[] InputArray, int NumOfRotations, int[] OutputArray)
         {
@@ -579,7 +579,7 @@ namespace LeetCode
                 // take out the last element
                 int temp = nums[nums.Length - 1];
 
-                for (int j = nums.Length-  1; j >0; j--)
+                for (int j = nums.Length - 1; j > 0; j--)
                 {
                     // shift array elements towards right by 1 place 
                     nums[j] = nums[j - 1];
@@ -625,10 +625,78 @@ namespace LeetCode
         [TestCase(new int[] { 1, 2 }, 3, new int[] { 2, 1 })]
         [TestCase(new int[] { 1, 2, 3, 4, 5, 6, 7 }, 3, new int[] { 5, 6, 7, 1, 2, 3, 4 })]
         [TestCase(new int[] { -1, -100, 3, 99 }, 2, new int[] { 3, 99, -1, -100 })]
-        public void RotateRightWithReverseTest(int[] InputArray, int NumOfRotations, int [] OutputArray)
+        public void RotateRightWithReverseTest(int[] InputArray, int NumOfRotations, int[] OutputArray)
         {
             RotateRightWithReverse(InputArray, NumOfRotations);
             Assert.AreEqual(OutputArray, InputArray);
+        }
+        #endregion
+
+        #region 1. Two Sum
+        // https://leetcode.com/problems/two-sum/
+
+        #region Problem Statement
+
+        /*
+            Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+
+            You may assume that each input would have exactly one solution, and you may not use the same element twice.
+
+            You can return the answer in any order.
+
+            Example 1:
+
+            Input: nums = [2,7,11,15], target = 9
+            Output: [0,1]
+            Output: Because nums[0] + nums[1] == 9, we return [0, 1].
+ 
+            Example 2:
+
+            Input: nums = [3,2,4], target = 6
+            Output: [1,2]
+        
+            Example 3:
+
+            Input: nums = [3,3], target = 6
+            Output: [0,1]
+ 
+
+            Constraints:
+
+            2 <= nums.length <= 103
+            -109 <= nums[i] <= 109
+            -109 <= target <= 109
+            Only one valid answer exists.
+
+         */
+        #endregion
+
+        public int[] TwoSum(int[] nums, int target)
+        {
+            if (nums?.Length == 2 && nums[0] + nums[1] == target) return new int[] { 0, 1 };
+
+            Dictionary<int, int> reminderIndexes = new Dictionary<int, int>();
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+                int reminderVal = target - nums[i];
+                bool remindexExists = reminderIndexes.ContainsKey(reminderVal);
+                if (remindexExists) return new int[] { reminderIndexes[reminderVal], i };
+
+                if (!remindexExists) reminderIndexes.Add(nums[i], i);
+            }
+
+            return new int[] { -1, -1 };
+        }
+
+        [TestCase(new int[] { 2, 7, 11, 15 }, 9, new int[] { 0, 1 })]
+        [TestCase(new int[] { 3, 2, 4 }, 6, new int[] { 1, 2 })]
+        [TestCase(new int[] { 3, 3 }, 6, new int[] { 0, 1 })]
+        [TestCase(new int[] { 0, 4, 3, 0 }, 0, new int[] { 0, 3 })]
+        [TestCase(new int[] { -3, 4, 3, 90 }, 0, new int[] { 0, 2 })]
+        public void TwoSumTest(int[] nums, int target, int[] outputnums)
+        {
+            Assert.AreEqual(outputnums, TwoSum(nums, target));
         }
         #endregion
     }
