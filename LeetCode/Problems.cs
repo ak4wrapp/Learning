@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace LeetCode
@@ -333,7 +334,8 @@ namespace LeetCode
             return true;
         }
 
-        private bool isColumnClean(char[][] board, int colIndex) {
+        private bool isColumnClean(char[][] board, int colIndex)
+        {
             HashSet<int> numbers = new HashSet<int>();
             for (int i = 0; i < board.Length; i++)
             {
@@ -479,7 +481,8 @@ namespace LeetCode
             {
                 for (int j = 0; j < grid[i].Length; j++)
                 {
-                    if (grid[i][j] == '1') {
+                    if (grid[i][j] == '1')
+                    {
 
                         numIslands += 1;
                         MarkAllConnectedLandAsVisited(grid, i, j);
@@ -554,9 +557,103 @@ namespace LeetCode
                                         )
                 })
             {
-               Assert.AreEqual(spec.expectedOutPut, NumIslands(spec.inputGrid));
+                Assert.AreEqual(spec.expectedOutPut, NumIslands(spec.inputGrid));
             }
         }
+        #endregion
+
+        #region 322. Coin Change
+        // https://leetcode.com/problems/coin-change/
+
+        #region Problem Statement
+        /*
+         *  You are given coins of different denominations and a total amount of money amount. 
+         *  Write a function to compute the fewest number of coins that you need to make up that amount.
+         *  If that amount of money cannot be made up by any combination of the coins, return -1.
+
+            You may assume that you have an infinite number of each kind of coin.
+
+            Example 1:
+
+            Input: coins = [1,2,5], amount = 11
+            Output: 3
+            Explanation: 11 = 5 + 5 + 1
+
+            Example 2:
+
+            Input: coins = [2], amount = 3
+            Output: -1
+
+            Example 3:
+
+            Input: coins = [1], amount = 0
+            Output: 0
+
+            Example 4:
+
+            Input: coins = [1], amount = 1
+            Output: 1
+
+            Example 5:
+
+            Input: coins = [1], amount = 2
+            Output: 2
+ 
+            Constraints:
+
+            1 <= coins.length <= 12
+            1 <= coins[i] <= 231 - 1
+            0 <= amount <= 104
+         */
+        #endregion
+
+
+        public int CoinChange(int[] coins, int amount)
+        {
+            if (amount == 0) return 0;
+            if (coins?.Length == 1 && coins[0] > amount) return -1;
+
+            // create an array to hold the minimum number of coins to make each amount
+            // Length is: amount + 1 so that you will have indices from 0 to amount in the array
+            // Value for each item is put amount +1, so we will know if it was ever replaced or not
+            int[] dp = Enumerable.Repeat(amount+1, amount+1).ToArray();
+
+            // there are 0 ways to make amount 0 with positive coin values
+            dp[0] = 0;
+
+            // look at one coin at a time
+            for (int coinIndex = 0; coinIndex < coins.Length; coinIndex++)
+            {
+                for (int amt = 0; amt <= amount; amt++)
+                {
+                    // make sure the difference between the current amount and the current coin is at least 0
+                    // replace the minimum value
+                    if ((amt - coins[coinIndex]) >= 0)
+                    {
+                        dp[amt] = Math.Min(dp[amt], dp[amt - coins[coinIndex]] + 1);
+                    }
+                }
+            }
+
+            // if the value remains more then the amount (as we initialize), it means that no coin combination can make that amount
+            return dp[amount] > amount ? -1 : dp[amount];
+        }
+
+        [Test]
+        public void CoinChangeTest()
+        {
+            foreach (var spec in new[] {
+                        (coins:  new int[] { 1,2,5 },amount: 11, expectedOutPut: 3),
+                        (coins:  new int[] { 2 }, amount: 3, expectedOutPut: -1),
+                        (coins:  new int[] { 1 }, amount: 0, expectedOutPut: 0),
+                        (coins:  new int[] { 1 }, amount: 1, expectedOutPut: 1),
+                        (coins:  new int[] { 1 }, amount: 2, expectedOutPut: 2)
+                })
+            {
+                Assert.AreEqual(spec.expectedOutPut, CoinChange(spec.coins, spec.amount), $"Coins: {string.Join(",", spec.coins) }, Amount: {spec.amount}");
+            }
+        }
+        
         #endregion
     }
 }
