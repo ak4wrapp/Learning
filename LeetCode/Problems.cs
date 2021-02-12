@@ -655,5 +655,186 @@ namespace LeetCode
         }
         
         #endregion
+
+        #region 29. Divide Two Integers
+        // https://leetcode.com/problems/divide-two-integers/
+
+        #region Problem Statement
+        /*
+            Given two integers dividend and divisor, divide two integers without using multiplication, division,
+            and mod operator. Return the quotient after dividing dividend by divisor.
+
+            The integer division should truncate toward zero, which means losing its fractional part.
+            For example, truncate(8.345) = 8 and truncate(-2.7335) = -2.
+
+            Note:
+
+            Assume we are dealing with an environment that could only store integers within the
+            32-bit signed integer range: [−231,  231 − 1].
+
+            For this problem, assume that your function returns 2 Power (31 − 1) when the division result overflows.
+ 
+
+            Example 1:
+
+            Input: dividend = 10, divisor = 3
+            Output: 3
+            Explanation: 10/3 = truncate(3.33333..) = 3.
+
+            Example 2:
+
+            Input: dividend = 7, divisor = -3
+            Output: -2
+            Explanation: 7/-3 = truncate(-2.33333..) = -2.
+
+            Example 3:
+
+            Input: dividend = 0, divisor = 1
+            Output: 0
+
+            Example 4:
+
+            Input: dividend = 1, divisor = 1
+            Output: 1
+ 
+            Constraints:
+
+            -231 <= dividend, divisor <= 231 - 1
+            divisor != 0
+         */
+        #endregion
+
+        #region Bitwise Shift Left and Right
+
+        /*
+            16 / 5 = 3 => 3 * 5 = 15 (5 + 5 + 5 = 15)
+
+            How many 5 we need?
+            binary search to guess the best answer.
+
+            5 * 2 = 10 * 2 = 20 > 16, so 16 - (5 * 2) = 6 (at least we need two 5)
+            5 * 2 = 10 > 6 (we need additional one 5)
+
+            so: 2 + 1 = 3
+
+            The answer is 3.
+        */
+        public int DivideUsingBitwiseLeftAndRight(int dividend, int divisor)
+        {
+            if (divisor == 0) return int.MaxValue;
+            if (dividend == 0) return 0;
+
+            var isPositive = (dividend > 0 && divisor > 0) || (dividend < 0 && divisor < 0);
+
+            var result = DivideUsingBitwiseLeftAndRight(Math.Abs((long)dividend), Math.Abs((long)divisor));
+
+            if ((!isPositive && -result < int.MinValue) || (isPositive && result > int.MaxValue))
+            {
+                return int.MaxValue;
+            }
+
+            if (!isPositive) return (int)-result;
+            return (int)result;
+        }
+
+        private long DivideUsingBitwiseLeftAndRight(long dividend, long divisor)
+        {
+            if (divisor > dividend)
+            {
+                return 0;
+            }
+            long guess = divisor;
+            long count = 1;
+
+            while (guess <= dividend)
+            {
+                guess <<= 1;
+                count <<= 1;
+            }
+
+            count >>= 1;
+            guess >>= 1;
+
+            return count + DivideUsingBitwiseLeftAndRight(dividend - guess, divisor);
+        }
+
+        [TestCase(10, 3, 3)]
+        [TestCase(-2147483648, -1, 2147483647)]
+        public void DivideUsingBitwiseLeftAndRightTest(int dividend, int divisor, int expectedOutput)
+        {
+            Assert.AreEqual(expectedOutput, DivideUsingBitwiseLeftAndRight(dividend, divisor));
+        }
+
+        #endregion
+
+        #region Using While and Accumulating Sum
+
+        public int DivideUsingWhie(int dividend, int divisor)
+        {
+            if (divisor == 0) return int.MaxValue;
+            if (dividend == 0) return 0;
+
+            bool negative = false;
+            if ((dividend < 0 || divisor < 0) && !(dividend < 0 & divisor < 0))
+            {
+                negative = true;
+            }
+
+            long dividendlong = dividend;
+            long divisorlong = divisor;
+
+            if (dividendlong < 0) { dividendlong = -dividendlong; }
+            if (divisorlong < 0) { divisorlong = -divisorlong; }
+
+
+            long res = 0;
+            long accum = divisorlong;
+            long accumtimes = 1;
+            long sum = 0;
+
+            while (true)
+            {
+                if (sum + accum <= dividendlong)
+                {
+                    sum += accum;
+                    res += accumtimes;
+
+                    accum += accum;
+                    accumtimes += accumtimes;
+
+                }
+                else
+                {
+                    if (accumtimes == 1)
+                    {
+                        break;
+                    }
+                    accum = divisorlong;
+                    accumtimes = 1;
+                }
+            }
+
+            if (negative)
+            {
+                res = -res;
+            }
+
+            int intRes = (int)res;
+            if (res > int.MaxValue || res < int.MinValue)
+            {
+                intRes = int.MaxValue;
+            }
+
+            return intRes;
+        }
+
+        [TestCase(10, 3, 3)]
+        [TestCase(int.MinValue, -1, int.MaxValue)]
+        public void DivideUsingWhieTest(int dividend, int divisor, int expectedOutput)
+        {
+            Assert.AreEqual(expectedOutput, DivideUsingWhie(dividend, divisor));
+        }
+        #endregion
+        #endregion
     }
 }
