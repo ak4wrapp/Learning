@@ -616,7 +616,7 @@ namespace LeetCode
             // create an array to hold the minimum number of coins to make each amount
             // Length is: amount + 1 so that you will have indices from 0 to amount in the array
             // Value for each item is put amount +1, so we will know if it was ever replaced or not
-            int[] dp = Enumerable.Repeat(amount+1, amount+1).ToArray();
+            int[] dp = Enumerable.Repeat(amount + 1, amount + 1).ToArray();
 
             // there are 0 ways to make amount 0 with positive coin values
             dp[0] = 0;
@@ -653,7 +653,7 @@ namespace LeetCode
                 Assert.AreEqual(spec.expectedOutPut, CoinChange(spec.coins, spec.amount), $"Coins: {string.Join(",", spec.coins) }, Amount: {spec.amount}");
             }
         }
-        
+
         #endregion
 
         #region 29. Divide Two Integers
@@ -835,6 +835,154 @@ namespace LeetCode
             Assert.AreEqual(expectedOutput, DivideUsingWhie(dividend, divisor));
         }
         #endregion
+        #endregion
+
+        #region 48. Rotate Image
+
+        // https://leetcode.com/problems/rotate-image/
+
+        public void RotateImage(int[][] matrix)
+        {
+            if (matrix == null)
+            {
+                return;
+            }
+
+            int n = matrix.Length;
+
+            if (n == 1)
+            {
+                return;
+            }
+
+            //transpose
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = i + 1; j < n; j++)
+                {
+                    var tmp = matrix[i][j];
+                    matrix[i][j] = matrix[j][i];
+                    matrix[j][i] = tmp;
+                }
+            }
+
+            //reverse rows
+            for (int i = 0; i < n; i++)
+            {
+                int left = 0;
+                int right = n - 1;
+
+                while (left < right)
+                {
+                    var tmp = matrix[i][left];
+                    matrix[i][left] = matrix[i][right];
+                    matrix[i][right] = tmp;
+
+                    left++;
+                    right--;
+                }
+            }
+        }
+
+        [Test]
+        public void RotateImageTest()
+        {
+            int[][] matrix = new int[3][];
+            matrix[0] = new int[] { 1, 2, 3 };
+            matrix[1] = new int[] { 4, 5, 6 };
+            matrix[2] = new int[] { 7, 8, 9 };
+
+            RotateImage(matrix);
+        }
+        #endregion
+
+        #region 62. Unique Paths
+
+        // https://leetcode.com/problems/unique-paths/
+
+        public int UniquePaths(int m, int n)
+        {
+            int[,] dp = new int[m, n];
+
+            for (int i = 0; i < m; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    if (i == 0 || j == 0)
+                    {
+                        dp[i, j] = 1;
+                    }
+                    else
+                    {
+                        dp[i, j] = dp[i - 1, j] + dp[i, j - 1];
+                    }
+                }
+            }
+
+            return dp[m - 1, n - 1];
+        }
+
+        [Test]
+        public void UniquePathsTest(int m, int n)
+        {
+            Assert.AreEqual(3, UniquePaths(3, 2));
+        }
+        #endregion
+
+        #region 63. Unique Paths II
+        // https://leetcode.com/problems/unique-paths-ii/
+        public int UniquePathsWithObstacles(int[][] obstacleGrid)
+        {
+            int rows = obstacleGrid.Length;
+            int cols = obstacleGrid[0].Length;
+
+            if (obstacleGrid[0][0] == 1) return 0;
+            if (obstacleGrid[rows - 1][cols - 1] == 1) return 0;
+
+            int[,] dp = new int[rows, cols];
+
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < cols; j++)
+                {
+                    if (i == 0 && j == 0)
+                    {
+                        dp[i, j] = 1;
+                    }
+                    else if (i == 0 || j == 0) // This could be two else if (i==0) and else if (j==0) if you want
+                    {
+                        int iIndex = i > 0 ? i - 1 : 0;
+                        int jIndex = j > 0 ? j - 1 : 0;
+
+                        dp[i, j] = obstacleGrid[i][j] == 1 ? 0 : dp[iIndex, jIndex] == 0 ? 0 : 1; ;
+                    }
+                    else
+                    {
+                      dp[i, j] = obstacleGrid[i][j] == 1 ? 0 : dp[i - 1, j] + dp[i, j - 1];
+                    }
+                }
+            }
+
+            return dp[rows - 1, cols - 1];
+        }
+
+        [Test]
+        public void UniquePathsWithObstaclesTest()
+        {
+            int[][] obstacleGrid = new int[3][];
+            obstacleGrid[0] = new int[] { 0, 0, 0 };
+            obstacleGrid[1] = new int[] { 0, 1, 0 };
+            obstacleGrid[2] = new int[] { 0, 0, 0 };
+
+            Assert.AreEqual(2, UniquePathsWithObstacles(obstacleGrid));
+
+            obstacleGrid = new int[3][];
+            obstacleGrid[0] = new int[] { 0, 0 };
+            obstacleGrid[1] = new int[] { 1, 1 };
+            obstacleGrid[2] = new int[] { 0, 0 };
+
+            Assert.AreEqual(0, UniquePathsWithObstacles(obstacleGrid));
+        }
         #endregion
     }
 }

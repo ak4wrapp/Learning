@@ -699,5 +699,101 @@ namespace LeetCode
             Assert.AreEqual(outputnums, TwoSum(nums, target));
         }
         #endregion
+
+        # region 4. Median of Two Sorted Arrays
+
+        // https://leetcode.com/problems/median-of-two-sorted-arrays/
+
+        public double FindMedianSortedArrays(int[] nums1, int[] nums2)
+        {
+            if (nums1?.Length == 0 && nums2?.Length == 0) return 0;
+
+            int midIndex = (nums1.Length + nums2.Length)/ 2;
+            int iIndex = 0;
+            int jIndex = 0;
+            int prev = 0;
+            int current = 0;
+            for (int i = 0; i <= midIndex; i++)
+            {
+                prev = current;
+                if (iIndex == nums1.Length)
+                {
+                    current = nums2[jIndex++];
+                }
+                else if (jIndex == nums2.Length)
+                {
+                    current = nums1[iIndex++];
+                }
+                else
+                {
+                    if (nums1[iIndex] < nums2[jIndex])
+                    {
+                        current = nums1[iIndex++];
+                    }
+                    else
+                    {
+                        current = nums2[jIndex++];
+                    }
+                }
+            }
+            if ((nums1.Length + nums2.Length) % 2 == 0)
+                return (prev + current) / 2.0;
+
+            return current;
+
+            //while (iIndex < nums1.Length && jIndex < nums2.Length)
+            //{
+            //    if (nums1[iIndex] < nums2[jIndex])
+            //    {
+            //        mergedArray[mergedIndex++] = nums1[iIndex++];
+            //    }
+            //    else
+            //    {
+            //        mergedArray[mergedIndex++] = nums2[jIndex++];
+            //    }
+            //}
+
+            //// Add LeftOvers
+            //while (iIndex < nums1.Length)
+            //{
+            //    mergedArray[mergedIndex++] = nums1[iIndex++];
+            //}
+            //while (jIndex < nums2.Length)
+            //{
+            //    mergedArray[mergedIndex++] = nums2[jIndex++];
+            //}
+
+            //if (mergedArray.Length == 1) return mergedArray[0];
+
+            //if (mergedArray.Length % 2 == 0) // Odd Number
+            //    return (double)(mergedArray[midIndex - 1] + mergedArray[midIndex]) / 2;
+
+            //return mergedArray[midIndex];
+        }
+
+        [Test]
+        public void FindMedianSortedArraysTest()
+        {
+            foreach (var spec in new[] {
+                        ( nums1: new int[] { 100001 }, nums2: new int[] { 100000 }, expectedOutput: 100000.50000 ),
+                        ( nums1: new int[] { 2, 3, 4 }, nums2: new int[] { 1 }, expectedOutput: 2.5 ),
+                        ( nums1: new int[] { 1, 3 }, nums2: new int[] { 2 }, expectedOutput: 2 ),
+                        ( nums1: new int[] { 3, 4 }, nums2: new int[] {  }, expectedOutput: 3.5 ),
+                        ( nums1: new int[] { }, nums2: new int[] { 1,2,3,4,5 }, expectedOutput: 3 ),
+                        ( nums1: new int[] { }, nums2: new int[] { 2,3 }, expectedOutput: 2.5 ),
+                        ( nums1: new int[] { 2 }, nums2: new int[] { }, expectedOutput: 2 ),
+                        ( nums1: new int[] { }, nums2: new int[] { 1 }, expectedOutput: 1 ),
+                        ( nums1: new int[] { 0, 0 }, nums2: new int[] { 0, 0 }, expectedOutput: 0.0 ),
+                        ( nums1: new int[] { 1, 2 }, nums2: new int[] { 3, 4 }, expectedOutput: 2.5 ),
+                        
+                        
+                    })
+            {
+                Assert.AreEqual(spec.expectedOutput, FindMedianSortedArrays(spec.nums1, spec.nums2),
+                    $"Failed test with input nums1: {String.Join(",", spec.nums1)}, nums2: {String.Join(",", spec.nums2)}");
+            }
+        }
+
+        #endregion
     }
 }
